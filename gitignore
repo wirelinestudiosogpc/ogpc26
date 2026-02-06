@@ -1,0 +1,27 @@
+# Ignore everything
+/*
+
+# But not these folders
+!Assets/
+!ProjectSettings/
+!Packages/
+
+# Ignore common OS files
+.DS_Store
+Thumbs.db
+
+# Ignore Unity generated folders inside Assets
+Assets/**/Library/
+Assets/**/Temp/
+Assets/**/obj/
+
+# Make sure git files are tracked
+!.gitignore
+!.gitattributes
+
+# Ignore logs
+*.log
+
+# Optional: Ignore build folders if you have them
+Build/
+Builds/
