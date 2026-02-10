@@ -462,7 +462,7 @@ public class PlayerMovement : MonoBehaviour
     private void SwordDash()
     {
         myCollider.excludeLayers = excludeEnemy;
-        Debug.Log($"distance:{dashDistance}");
+        //Debug.Log($"distance:{dashDistance}");
         //rb.AddForce(Camera.main.transform.forward * dashDistance, ForceMode.Impulse);
         controller.Move(Camera.main.transform.forward * dashDistance / 15);
         swung = true;
