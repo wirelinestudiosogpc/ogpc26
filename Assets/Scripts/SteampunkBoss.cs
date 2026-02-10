@@ -12,6 +12,12 @@ public class SteampunkBoss : MonoBehaviour
 
     public GameObject JumpHitbox;
 
+    public GameObject LungeHitbox;
+    public float lungeBackup;
+
+    public GameObject Rocket;
+    public bool rocketShot = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,6 +29,7 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (stallTimer <= 0)
         {
+            transform.LookAt(Player.transform);
             randomNumber = Random.Range(1, 6);
             setTimer = false;
         }
@@ -39,11 +46,11 @@ public class SteampunkBoss : MonoBehaviour
         {
             LungeAttack();
         }
-        else if (randomNumber == 4)
+        else if (randomNumber == 5)
         {
             SlashAttack();
         }
-        else if (randomNumber == 5)
+        else if (randomNumber == 4)
         {
             Block();
         }
@@ -94,10 +101,16 @@ public class SteampunkBoss : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, TargetPosition, -30 * Time.deltaTime);
         }
+        else if (!rocketShot)
+        {
+            Instantiate(Rocket, transform.position, transform.rotation);
+            rocketShot = true;
+        }
         stallTimer -= Time.deltaTime;
         if (stallTimer <= 0)
         {
             setposition = false;
+            rocketShot = false;
         }
     }
 
@@ -113,13 +126,24 @@ public class SteampunkBoss : MonoBehaviour
             TargetPosition = Player.transform.position;
             setposition = true;
         }
-        transform.position = Vector3.MoveTowards(transform.position, TargetPosition, 30 * Time.deltaTime);
+        if (lungeBackup > 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, TargetPosition, -10 * Time.deltaTime);
+            lungeBackup -= Time.deltaTime;
+        }
+        if (lungeBackup <= 0)
+        {
+            LungeHitbox.SetActive(true);
+            transform.position = Vector3.MoveTowards(transform.position, TargetPosition, 30 * Time.deltaTime);
+        }
         if (transform.position == TargetPosition)
         {
+            LungeHitbox.SetActive(false);
             stallTimer -= Time.deltaTime;
         }
         if (stallTimer <= 0)
         {
+            lungeBackup = 1;
             setposition = false;
         }
     }
@@ -148,9 +172,13 @@ public class SteampunkBoss : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (randomNumber == 1)
+        if (other.CompareTag("Player"))
         {
+            Debug.Log("Hit Player");
             playerMovement.HP -= 1;
+        }
+        else{
+            Debug.Log("Failed");
         }
     }
 }
