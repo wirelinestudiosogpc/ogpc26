@@ -46,11 +46,11 @@ public class SteampunkBoss : MonoBehaviour
         {
             LungeAttack();
         }
-        else if (randomNumber == 4)
+        else if (randomNumber == 5)
         {
             SlashAttack();
         }
-        else if (randomNumber == 5)
+        else if (randomNumber == 4)
         {
             Block();
         }
