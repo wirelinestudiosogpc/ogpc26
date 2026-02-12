@@ -108,8 +108,15 @@ public class IntroWagon : MonoBehaviour
             transform.rotation = Quaternion.Euler(currentEuler);
 
             transform.position += transform.forward * 2.25f * Time.deltaTime;
-            player.transform.position = Vector3.MoveTowards(player.transform.position, playerKeeper.transform.position, Mathf.Infinity * Time.deltaTime);
-            npc.transform.position = Vector3.MoveTowards(npc.transform.position, npcKeeper.transform.position, Mathf.Infinity * Time.deltaTime);
+            if (Time.deltaTime > 0)
+            {
+                player.transform.position = Vector3.MoveTowards(player.transform.position, playerKeeper.transform.position, Mathf.Infinity * Time.deltaTime);
+                npc.transform.position = Vector3.MoveTowards(npc.transform.position, npcKeeper.transform.position, Mathf.Infinity * Time.deltaTime);
+            }
+            else{
+                player.transform.position = Vector3.MoveTowards(player.transform.position, playerKeeper.transform.position, Mathf.Infinity);
+            npc.transform.position = Vector3.MoveTowards(npc.transform.position, npcKeeper.transform.position, Mathf.Infinity);
+            }
             npc.transform.rotation = npcKeeper.transform.rotation;
 
             player.GetComponent<PlayerMovement>().energy = 0;
