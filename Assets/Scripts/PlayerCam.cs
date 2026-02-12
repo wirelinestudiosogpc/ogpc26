@@ -29,7 +29,7 @@ public class PlayerCam : MonoBehaviour
 
         previousSourceRotation = wagonRot.rotation;
 
-        yRotation += 90;
+        yRotation += 30;
         xRotation += 20;
     }
 

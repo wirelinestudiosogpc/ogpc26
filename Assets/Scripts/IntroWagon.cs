@@ -12,7 +12,6 @@ public class IntroWagon : MonoBehaviour
     public float speed;
     public GameObject visibleWagon;
 
-    public GameObject npcKeeper;
     public GameObject npc;
     float timer1;
     float timer2;
@@ -111,13 +110,10 @@ public class IntroWagon : MonoBehaviour
             if (Time.deltaTime > 0)
             {
                 player.transform.position = Vector3.MoveTowards(player.transform.position, playerKeeper.transform.position, Mathf.Infinity * Time.deltaTime);
-                npc.transform.position = Vector3.MoveTowards(npc.transform.position, npcKeeper.transform.position, Mathf.Infinity * Time.deltaTime);
             }
             else{
                 player.transform.position = Vector3.MoveTowards(player.transform.position, playerKeeper.transform.position, Mathf.Infinity);
-            npc.transform.position = Vector3.MoveTowards(npc.transform.position, npcKeeper.transform.position, Mathf.Infinity);
             }
-            npc.transform.rotation = npcKeeper.transform.rotation;
 
             player.GetComponent<PlayerMovement>().energy = 0;
 
