@@ -4,6 +4,7 @@ public class SteampunkBoss : MonoBehaviour
 {
     public PlayerMovement playerMovement;
     public GameObject Player;
+    public float HP;
     public int randomNumber = 0;
     public float stallTimer = 0;
     public bool setTimer = false;
@@ -17,6 +18,11 @@ public class SteampunkBoss : MonoBehaviour
 
     public GameObject Rocket;
     public bool rocketShot = false;
+
+    public bool parry = false;
+    public GameObject CounterAttack;
+
+    public GameObject SlashHitbox;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,11 +52,11 @@ public class SteampunkBoss : MonoBehaviour
         {
             LungeAttack();
         }
-        else if (randomNumber == 5)
+        else if (randomNumber == 4)
         {
             SlashAttack();
         }
-        else if (randomNumber == 4)
+        else if (randomNumber == 5)
         {
             Block();
         }
@@ -152,8 +158,16 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
-            stallTimer = 1;
+            stallTimer = 1.5f;
             setTimer = true;
+        }
+        if (stallTimer < 1 && stallTimer > 0.5)
+        {
+            SlashHitbox.SetActive(true);
+        }
+        else if (stallTimer < 0.5)
+        {
+            SlashHitbox.SetActive(false);
         }
 
         stallTimer -= Time.deltaTime;
@@ -166,8 +180,18 @@ public class SteampunkBoss : MonoBehaviour
             stallTimer = 1;
             setTimer = true;
         }
+        if (parry)
+        {   
+            stallTimer = 0.5f;
+            CounterAttack.SetActive(true);
+        }
 
         stallTimer -= Time.deltaTime;
+        if (stallTimer <= 0)
+        {
+            parry = false;
+            CounterAttack.SetActive(false);
+        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -176,6 +200,15 @@ public class SteampunkBoss : MonoBehaviour
         {
             Debug.Log("Hit Player");
             playerMovement.HP -= 1;
+        }
+        else if (other.CompareTag("Sword") && randomNumber < 5)
+        {
+            HP--;
+        }
+        else if (other.CompareTag("Sword") && randomNumber == 4 && !parry)
+        {
+            transform.LookAt(Player.transform);
+            parry = true;
         }
         else{
             Debug.Log("Failed");
