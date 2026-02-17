@@ -193,25 +193,4 @@ public class SteampunkBoss : MonoBehaviour
             CounterAttack.SetActive(false);
         }
     }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("Hit Player");
-            playerMovement.HP -= 1;
-        }
-        else if (other.CompareTag("Sword") && randomNumber < 5)
-        {
-            HP--;
-        }
-        else if (other.CompareTag("Sword") && randomNumber == 4 && !parry)
-        {
-            transform.LookAt(Player.transform);
-            parry = true;
-        }
-        else{
-            Debug.Log("Failed");
-        }
-    }
 }
