@@ -24,16 +24,16 @@ public class MainBossHittbox : MonoBehaviour
             Debug.Log("Hit Player");
             playerMovement.HP -= 1;
         }
-        else if (other.gameObject.tag == "Sword" && steampunkBoss.randomNumber < 5)
-        {
-            steampunkBoss.HP -= 1;
-            Debug.Log("Hit");
-        }
-        else if (other.CompareTag("Sword") && steampunkBoss.randomNumber == 5 && !steampunkBoss.parry)
+        if (other.CompareTag("Sword") && (steampunkBoss.randomNumber == 5 || steampunkBoss.randomNumber == 8) && !steampunkBoss.parry)
         {
             Debug.Log("Parried");
             transform.LookAt(Player.transform);
             steampunkBoss.parry = true;
+        }
+        else if (other.gameObject.tag == "Sword")
+        {
+            steampunkBoss.HP -= 1;
+            Debug.Log("Hit");
         }
         else{
             Debug.Log("Failed");

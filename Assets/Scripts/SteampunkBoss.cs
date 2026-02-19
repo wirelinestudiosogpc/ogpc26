@@ -24,6 +24,10 @@ public class SteampunkBoss : MonoBehaviour
 
     public GameObject SlashHitbox;
 
+    public bool uppies;
+
+    public GameObject RocketBird;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,10 +37,16 @@ public class SteampunkBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stallTimer <= 0)
+        if (stallTimer <= 0 && HP > 34)
         {
             transform.LookAt(Player.transform);
             randomNumber = Random.Range(1, 6);
+            setTimer = false;
+        }
+        else if (stallTimer <= 0)
+        {
+            transform.LookAt(Player.transform);
+            randomNumber = Random.Range(6, 9);
             setTimer = false;
         }
         
@@ -59,6 +69,18 @@ public class SteampunkBoss : MonoBehaviour
         else if (randomNumber == 5)
         {
             Block();
+        }
+        else if (randomNumber == 6)
+        {
+            JumpLunge();
+        }
+        else if (randomNumber == 7)
+        {
+            RocketRain();
+        }
+        else if (randomNumber == 8)
+        {
+            SlashParry();
         }
     }
 
@@ -184,6 +206,101 @@ public class SteampunkBoss : MonoBehaviour
         {   
             stallTimer = 0.5f;
             CounterAttack.SetActive(true);
+        }
+
+        stallTimer -= Time.deltaTime;
+        if (stallTimer <= 0)
+        {
+            parry = false;
+            CounterAttack.SetActive(false);
+        }
+    }
+
+    void JumpLunge()
+    {
+        if (!setTimer)
+        {
+            stallTimer = 1;
+            setTimer = true;
+        }
+        if (!setposition)
+        {
+            TargetPosition = Player.transform.position;
+            setposition = true;
+        }
+        if (uppies)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 20, transform.position.z), 20 * Time.deltaTime);
+        }
+        if ((transform.position.y == 20))
+        {
+            uppies = false;
+            transform.position = Vector3.MoveTowards(transform.position, TargetPosition, 80 * Time.deltaTime);
+            JumpHitbox.SetActive(true);
+            LungeHitbox.SetActive(true);
+        }
+        if (transform.position == TargetPosition)
+        {
+            JumpHitbox.SetActive(false);
+            LungeHitbox.SetActive(false);
+            stallTimer -= Time.deltaTime;
+        }
+        if (stallTimer <= 0)
+        {
+            uppies = true;
+            setposition = false;
+        }
+    }
+
+    void RocketRain()
+    {
+        if (!setTimer)
+        {
+            stallTimer = 2.5f;
+            setTimer = true;
+        }
+        if (!setposition)
+        {
+            TargetPosition = Player.transform.position;
+            setposition = true;
+        }
+        if (stallTimer >= 2.2f && randomNumber == 2)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, TargetPosition, -50 * Time.deltaTime);
+        }
+        else if (!rocketShot)
+        {
+            Instantiate(RocketBird, transform.position, transform.rotation);
+            rocketShot = true;
+        }
+        stallTimer -= Time.deltaTime;
+        if (stallTimer <= 0)
+        {
+            setposition = false;
+            rocketShot = false;
+        }
+    }
+
+    void SlashParry()
+    {
+        if (!setTimer)
+        {
+            stallTimer = 1.2f;
+            setTimer = true;
+        }
+       if (parry)
+        {   
+            stallTimer = 0.5f;
+            CounterAttack.SetActive(true);
+        }
+
+        if (stallTimer < 0.6f && stallTimer > 0.3f)
+        {
+            SlashHitbox.SetActive(true);
+        }
+        else if (stallTimer < 0.3f)
+        {
+            SlashHitbox.SetActive(false);
         }
 
         stallTimer -= Time.deltaTime;
