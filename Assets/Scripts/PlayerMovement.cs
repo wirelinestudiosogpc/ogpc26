@@ -469,6 +469,10 @@ public class PlayerMovement : MonoBehaviour
         swungTimer = 0;
         timeSinceLastSwing = 0;
     }
-    
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "nextlevelportal")
+            SceneManager.LoadScene(2); 
+    }
     
 }

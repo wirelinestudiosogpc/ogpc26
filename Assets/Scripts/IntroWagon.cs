@@ -137,7 +137,7 @@ public class IntroWagon : MonoBehaviour
         }
         else
         {
-            npc.GetComponent<MouthOpenClose>().whatToSay = "Go on ahead, I'll catch up later.";
+            npc.GetComponent<MouthOpenClose>().whatToSay = "Go on ahead, save or town! I'll catch up later.";
             if (timer1 < .7)
             {
                 player.transform.position = Vector3.MoveTowards(player.transform.position, playerKeeper.transform.position, Mathf.Infinity * Time.deltaTime);
