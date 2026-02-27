@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SteampunkBoss : MonoBehaviour
 {
+    public RectTransform HPBar;
+
     public PlayerMovement playerMovement;
     public GameObject Player;
     public float HP;
@@ -24,7 +26,7 @@ public class SteampunkBoss : MonoBehaviour
 
     public GameObject SlashHitbox;
 
-    public bool uppies;
+    public int jumpLungePhase;
 
     public GameObject RocketBird;
 
@@ -82,6 +84,8 @@ public class SteampunkBoss : MonoBehaviour
         {
             SlashParry();
         }
+
+        HPBar.sizeDelta = new Vector2(HP*3.9f, HPBar.sizeDelta.y);
     }
 
     void JumpAttack()
@@ -202,7 +206,7 @@ public class SteampunkBoss : MonoBehaviour
             stallTimer = 1;
             setTimer = true;
         }
-        if (parry)
+        if (parry && stallTimer > 0.5f)
         {   
             stallTimer = 0.5f;
             CounterAttack.SetActive(true);
@@ -228,18 +232,45 @@ public class SteampunkBoss : MonoBehaviour
             TargetPosition = Player.transform.position;
             setposition = true;
         }
-        if (uppies)
+        if (jumpLungePhase == 0)
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 20, transform.position.z), 20 * Time.deltaTime);
         }
-        if ((transform.position.y == 20))
+        if ((transform.position.y == 20) && jumpLungePhase == 0)
         {
-            uppies = false;
+            jumpLungePhase = 1;
+        }
+        if (jumpLungePhase == 1)
+        {
             transform.position = Vector3.MoveTowards(transform.position, TargetPosition, 80 * Time.deltaTime);
             JumpHitbox.SetActive(true);
             LungeHitbox.SetActive(true);
         }
-        if (transform.position == TargetPosition)
+        if (transform.position == TargetPosition && jumpLungePhase == 1)
+        {
+            jumpLungePhase = 2;
+            TargetPosition = Player.transform.position;
+            transform.LookAt(Player.transform);
+        }
+        if (jumpLungePhase == 2)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 20, transform.position.z), 20 * Time.deltaTime);
+        }
+        if ((transform.position.y == 20) && jumpLungePhase == 2)
+        {
+            jumpLungePhase = 3;
+        }
+        if (jumpLungePhase == 3)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, TargetPosition, 80 * Time.deltaTime);
+            JumpHitbox.SetActive(true);
+            LungeHitbox.SetActive(true);
+        }
+        if (transform.position == TargetPosition && jumpLungePhase == 3)
+        {
+            jumpLungePhase = 4;
+        }
+        if (jumpLungePhase == 4)
         {
             JumpHitbox.SetActive(false);
             LungeHitbox.SetActive(false);
@@ -247,7 +278,7 @@ public class SteampunkBoss : MonoBehaviour
         }
         if (stallTimer <= 0)
         {
-            uppies = true;
+            jumpLungePhase = 0;
             setposition = false;
         }
     }
@@ -288,7 +319,7 @@ public class SteampunkBoss : MonoBehaviour
             stallTimer = 1.2f;
             setTimer = true;
         }
-       if (parry)
+       if (parry && stallTimer > 0.5f)
         {   
             stallTimer = 0.5f;
             CounterAttack.SetActive(true);
