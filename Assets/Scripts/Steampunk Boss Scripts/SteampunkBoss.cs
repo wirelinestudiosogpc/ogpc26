@@ -39,7 +39,7 @@ public class SteampunkBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stallTimer <= 0 && HP > 34)
+        if (stallTimer <= 0 && HP > 18)
         {
             transform.LookAt(Player.transform);
             randomNumber = Random.Range(1, 6);
@@ -85,7 +85,7 @@ public class SteampunkBoss : MonoBehaviour
             SlashParry();
         }
 
-        HPBar.sizeDelta = new Vector2(HP*3.9f, HPBar.sizeDelta.y);
+        HPBar.sizeDelta = new Vector2(HP*7.8f, HPBar.sizeDelta.y);
     }
 
     void JumpAttack()
