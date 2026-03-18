@@ -35,8 +35,6 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject cinemachineCam;
 
-    float horizontalInput;
-    float verticalInput;
 
     public GameObject sword;
     public Transform swordSpawnPoint;
@@ -81,6 +79,8 @@ public class PlayerMovement : MonoBehaviour
 
     InputAction jumpAction, walkAction, attackAction, pauseAction, runAction, lookAction;
 
+    bool ended;
+
     private void Awake()
     {
         
@@ -100,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void PlayerInputs()
     {
+        if (ended) return;
         if (pauseAction.WasPressedThisFrame() && Time.timeScale == 1)
         {
             uiController.GetComponent<PauseMenuControls>().mainCanvas.SetActive(false);
@@ -172,6 +173,11 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        if (HP <=0)
+        {
+            Invoke(nameof(Application.Quit), 0.5f);
+            Debug.Log("buh bye");
+        }
         PlayerInputs();
 
         timeSinceLastSwing += Time.deltaTime;
@@ -301,17 +307,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void MyInput()
     {
-        
-        
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            
-
-        }
-
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
         
 
 
@@ -472,7 +468,14 @@ public class PlayerMovement : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "nextlevelportal")
-            SceneManager.LoadScene(2); 
+        {
+            Invoke(nameof(levelEnd), 3f);
+            ended = true;
+        }
+            
     }
-    
+    void levelEnd()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1); 
+    }
 }
