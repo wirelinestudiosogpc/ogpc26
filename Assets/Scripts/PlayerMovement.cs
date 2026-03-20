@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -20,11 +21,12 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed;
     public float gravity;
     public float jumpHeight;
+    public float runJumpHeight;
     public PlayerCam playerCam;
     public bool canWalk;
     float walkResetTimer;
     bool walkResetTimerGo;
-    bool running;
+    public bool running;
 
 
     public InputAction pauseGameButton;
@@ -98,6 +100,28 @@ public class PlayerMovement : MonoBehaviour
         runAction = playerInput.actions["Run"];
         lookAction = playerInput.actions["Look"];
     }
+    
+    public Image fadeInImg;
+    public float fadeInTimer = 1f;
+    IEnumerator FadeIn()
+    {
+        float timer = 0f;
+        Color currentColor = fadeInImg.color;
+        fadeInImg.gameObject.SetActive(true);
+
+        while (timer < fadeInTimer)
+        {
+            timer += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, timer / fadeInTimer);
+            currentColor.a = alpha;
+            fadeInImg.color = currentColor;
+            yield return null;
+        }
+        
+        currentColor.a = 1f;
+        fadeInImg.color = currentColor;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     void PlayerInputs()
     {
         if (ended) return;
@@ -121,14 +145,13 @@ public class PlayerMovement : MonoBehaviour
 
         moveInput = walkAction.ReadValue<Vector2>();
 
-        if (runAction.WasPressedThisFrame() && moveAnimationInputY == 1 && !running)
+        if (runAction.WasPressedThisFrame() && !running)
         {
             running = true;
         }
-        else if (runAction.WasPressedThisFrame() && moveAnimationInputY == 2 && running)
+        else if (runAction.WasPressedThisFrame() && running)
         {
             running = false;
-            moveAnimationInputY = 1;
         }
 
         playerCam.lookInput = lookAction.ReadValue<Vector2>();
@@ -163,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (jumpAction.WasPressedThisFrame() && controller.isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -1f * gravity);
+            velocity.y = running ? Mathf.Sqrt(runJumpHeight * -1f * gravity) : Mathf.Sqrt(jumpHeight * -1f * gravity);
             jumped = true;
         }
         if (jumpAction.WasReleasedThisFrame() && !controller.isGrounded)
@@ -173,10 +196,11 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (HP <=0)
+        if (HP ==0)
         {
-            Invoke(nameof(Application.Quit), 0.5f);
-            Debug.Log("buh bye");
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            StartCoroutine(FadeIn());
+            HP--;
         }
         PlayerInputs();
 
@@ -293,7 +317,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (canWalk /*&& !running*/)
         {
-            Vector3 move = new Vector3(moveInput.x * speed, 0, moveInput.y * speed);
+            Vector3 move = running ?  new Vector3(moveInput.x * runSpeed, 0, moveInput.y * runSpeed) : new Vector3(moveInput.x * speed, 0, moveInput.y * speed);
             Vector3 move2 = transform.TransformDirection(move);
             controller.Move(move2 * Time.deltaTime);
         }
