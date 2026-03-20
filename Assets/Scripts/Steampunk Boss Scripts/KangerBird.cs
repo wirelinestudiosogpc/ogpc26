@@ -4,6 +4,7 @@ public class KangerBird : MonoBehaviour
 {
     public PlayerMovement playerMovement;
     public GameObject player;
+    public GameObject Boss;
     public Vector3 TargetPosition;
     public float playerDistance;
 
@@ -12,11 +13,14 @@ public class KangerBird : MonoBehaviour
     public float rotationSpeed = 30;
 
     public bool isStuck;
+    public GameObject PocketBird;
+
     public float despawnTimer = 10;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.Find("Player");
+        Boss = GameObject.Find("Boss");
         playerMovement = FindObjectOfType<PlayerMovement>();
         TargetPosition = player.transform.position;
     }
@@ -26,18 +30,30 @@ public class KangerBird : MonoBehaviour
     {
         rotationSpeed = 60;
         
-        direction = (player.transform.position - transform.position).normalized;
-        targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 30 * Time.deltaTime);
+        
 
-        playerDistance = Vector3.Distance(transform.position, player.transform.position);
-        if (playerDistance < 5)
+        if (playerDistance > 5 && !isStuck)
         {
+            direction = (player.transform.position - transform.position).normalized;
+            targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 30 * Time.deltaTime);
+
+            playerDistance = Vector3.Distance(transform.position, player.transform.position);
             transform.Translate(Vector3.forward * Time.deltaTime * (playerDistance/1.5f+8));
+        }
+        else if (playerDistance <= 5 && !isStuck)
+        {
+            Instantiate(PocketBird, transform.position, transform.rotation);
+            Instantiate(PocketBird, transform.position, Quaternion.Euler(transform.position.x, transform.position.y + 15, transform.position.z));
+            Instantiate(PocketBird, transform.position, Quaternion.Euler(transform.position.x, transform.position.y - 15, transform.position.z));
+            isStuck = true;
         }
         else
         {
-            
+            direction = (Boss.transform.position - transform.position).normalized;
+            targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 30 * Time.deltaTime);
+            transform.Translate(Vector3.forward * Time.deltaTime * (playerDistance/1.5f+8));
         }
     }
 

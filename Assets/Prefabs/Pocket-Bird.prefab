@@ -123,9 +123,9 @@ GameObject:
   - component: {fileID: 3331015182345255402}
   - component: {fileID: 8033871637373823510}
   - component: {fileID: 2531262970670118821}
-  - component: {fileID: -4028585677943754734}
+  - component: {fileID: 4772976926337707723}
   m_Layer: 0
-  m_Name: Kanger-Bird
+  m_Name: Pocket-Bird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -226,7 +226,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-4028585677943754734
+--- !u!114 &4772976926337707723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,9 +235,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8785096838275737211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 397373f6bdf91443f9d9a1244f5ef281, type: 3}
+  m_Script: {fileID: 11500000, guid: 9295bee93f3274d35a777ad0caf57a05, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KangerBird
+  m_EditorClassIdentifier: Assembly-CSharp::PocketBird
   playerMovement: {fileID: 0}
   player: {fileID: 0}
   TargetPosition: {x: 0, y: 0, z: 0}
@@ -246,5 +246,4 @@ MonoBehaviour:
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
   rotationSpeed: 30
   isStuck: 0
-  PocketBird: {fileID: 8785096838275737211, guid: 829c034e39ab04355ae603f8c0be6fb5, type: 3}
   despawnTimer: 10

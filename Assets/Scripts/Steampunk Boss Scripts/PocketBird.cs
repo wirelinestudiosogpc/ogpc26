@@ -43,7 +43,7 @@ public class PocketBird : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Hit Player");
+            Debug.Log("Bird Hit Player");
             playerMovement.HP -= 2f;
             GameObject.Destroy(this.gameObject);
         }

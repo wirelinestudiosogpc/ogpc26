@@ -43,7 +43,7 @@ public class Rocket : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Hit Player");
+            Debug.Log("Rocket Hit Player");
             playerMovement.HP -= 2f;
         }
         else if (other.CompareTag("Boss")){
