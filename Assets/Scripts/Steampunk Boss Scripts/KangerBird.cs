@@ -23,6 +23,12 @@ public class KangerBird : MonoBehaviour
         Boss = GameObject.Find("Boss");
         playerMovement = FindObjectOfType<PlayerMovement>();
         TargetPosition = player.transform.position;
+        transform.LookAt(player.transform);
+
+        direction = (player.transform.position - transform.position).normalized;
+        targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 30 * Time.deltaTime);
+        playerDistance = Vector3.Distance(transform.position, player.transform.position);
     }
 
     // Update is called once per frame
@@ -44,12 +50,13 @@ public class KangerBird : MonoBehaviour
         else if (playerDistance <= 5 && !isStuck)
         {
             Instantiate(PocketBird, transform.position, transform.rotation);
-            Instantiate(PocketBird, transform.position, Quaternion.Euler(transform.position.x, transform.position.y + 15, transform.position.z));
-            Instantiate(PocketBird, transform.position, Quaternion.Euler(transform.position.x, transform.position.y - 15, transform.position.z));
+            Instantiate(PocketBird, transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y + 15, transform.rotation.z));
+            Instantiate(PocketBird, transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y - 15, transform.rotation.z));
             isStuck = true;
         }
-        else
+        else if (isStuck)
         {
+            transform.LookAt(Boss.transform);
             direction = (Boss.transform.position - transform.position).normalized;
             targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 30 * Time.deltaTime);
@@ -64,11 +71,17 @@ public class KangerBird : MonoBehaviour
             Debug.Log("Hit Player");
             playerMovement.HP -= 2f;
         }
-        else if (other.CompareTag("Boss")){
-            Debug.Log("Shooting");
-        }
         else if (other.CompareTag("Ground")){
             Destroy(this.gameObject);
+        }
+    }
+
+    void OnColliderStay(Collider other)
+    {
+        if (other.CompareTag("Boss") && isStuck)
+        {
+            Destroy(this.gameObject);
+            Debug.Log("Shooting");
         }
     }
 }

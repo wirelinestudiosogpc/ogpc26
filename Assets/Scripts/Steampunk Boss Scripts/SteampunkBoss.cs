@@ -234,9 +234,9 @@ public class SteampunkBoss : MonoBehaviour
         }
         if (jumpLungePhase == 0)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 20, transform.position.z), 20 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 30, transform.position.z), 20 * Time.deltaTime);
         }
-        if ((transform.position.y == 20) && jumpLungePhase == 0)
+        if ((transform.position.y == 30) && jumpLungePhase == 0)
         {
             jumpLungePhase = 1;
         }
@@ -254,9 +254,9 @@ public class SteampunkBoss : MonoBehaviour
         }
         if (jumpLungePhase == 2)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 20, transform.position.z), 20 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 30, transform.position.z), 20 * Time.deltaTime);
         }
-        if ((transform.position.y == 20) && jumpLungePhase == 2)
+        if ((transform.position.y == 30) && jumpLungePhase == 2)
         {
             jumpLungePhase = 3;
         }
