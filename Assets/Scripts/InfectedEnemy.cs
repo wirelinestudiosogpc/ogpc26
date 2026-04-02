@@ -5,7 +5,7 @@ public class InfectedEnemy : MonoBehaviour
 {
     public float hp;
     public float hurtAmount;
-    public MeshRenderer MeshRenderer;
+    public SkinnedMeshRenderer MeshRenderer;
     public Material def;
     public Material hur;
     public bool isInside;
@@ -13,17 +13,41 @@ public class InfectedEnemy : MonoBehaviour
     private NavMeshAgent agent;
     public Transform target;
 
+    public Animator animator;
+
+
+    public bool isInRange;
+    public bool isTouchingPlayer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        MeshRenderer = GetComponent<MeshRenderer>();
+        //MeshRenderer = GetComponent<MeshRenderer>();
         agent = GetComponent<NavMeshAgent>();
+        MeshRenderer.material = def;
     }
 
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(target.position);
+        if (!isInRange)
+        {
+            animator.SetBool("Walk", true);
+            animator.SetBool("Attack", false);
+        }
+        else
+        {
+            animator.SetBool("Walk", false);
+            animator.SetBool("Attack", true);
+            transform.LookAt(target.position);
+        }
+        if (!isTouchingPlayer)
+            agent.SetDestination(target.position);
+        else
+            agent.SetDestination(transform.position);
+        isInRange = agent.remainingDistance < agent.stoppingDistance;
+
+
+
         if (hp < 0)
         {
             Destroy(gameObject);
@@ -32,6 +56,7 @@ public class InfectedEnemy : MonoBehaviour
         if (!isInside && hp != 0)
             MeshRenderer.material = def;
 
+        
         
     }
     private void LateUpdate()
@@ -42,7 +67,7 @@ public class InfectedEnemy : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Sword")
+        if (other.gameObject.CompareTag("Sword"))
         {
             hp -= hurtAmount;
             MeshRenderer.material = hur;
@@ -50,12 +75,22 @@ public class InfectedEnemy : MonoBehaviour
     }
     public void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Sword")
+        if (other.gameObject.CompareTag("Sword"))
             isInside = true;
     }
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Sword" && hp != 0)
+        if (other.gameObject.CompareTag("Sword") && hp != 0)
             MeshRenderer.material = def;
+    }
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+            isTouchingPlayer = true;
+    }
+    public void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+            isTouchingPlayer = false;
     }
 }
