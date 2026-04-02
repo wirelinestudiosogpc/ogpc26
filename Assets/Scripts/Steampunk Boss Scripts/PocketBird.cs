@@ -24,7 +24,7 @@ public class PocketBird : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rotationSpeed = 20;
+        rotationSpeed = 30;
 
         direction = (TargetPosition - transform.position).normalized;
         targetRotation = Quaternion.LookRotation(direction);

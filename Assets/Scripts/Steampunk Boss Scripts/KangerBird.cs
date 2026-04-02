@@ -38,7 +38,7 @@ public class KangerBird : MonoBehaviour
         
         
 
-        if (playerDistance > 5 && !isStuck)
+        if (playerDistance > 10 && !isStuck)
         {
             direction = (player.transform.position - transform.position).normalized;
             targetRotation = Quaternion.LookRotation(direction);
@@ -47,11 +47,11 @@ public class KangerBird : MonoBehaviour
             playerDistance = Vector3.Distance(transform.position, player.transform.position);
             transform.Translate(Vector3.forward * Time.deltaTime * (playerDistance/1.5f+8));
         }
-        else if (playerDistance <= 5 && !isStuck)
+        else if (playerDistance <= 10 && !isStuck)
         {
             Instantiate(PocketBird, transform.position, transform.rotation);
-            Instantiate(PocketBird, transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y + 15, transform.rotation.z));
-            Instantiate(PocketBird, transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y - 15, transform.rotation.z));
+            Instantiate(PocketBird, transform.position, transform.rotation * Quaternion.Euler(0, -30, 0));
+            Instantiate(PocketBird, transform.position, transform.rotation * Quaternion.Euler(0, 30, 0));
             isStuck = true;
         }
         else if (isStuck)
