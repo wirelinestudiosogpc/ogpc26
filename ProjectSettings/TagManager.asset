@@ -12,6 +12,9 @@ TagManager:
   - Boss
   - nextlevelportal
   - EnemyInteract
+  - EnemyDead
+  - EnemyHead
+  - EnemyHand
   layers:
   - Default
   - TransparentFX

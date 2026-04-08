@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.XR;
 
 public class InfectedEnemy : MonoBehaviour
 {
@@ -12,45 +13,77 @@ public class InfectedEnemy : MonoBehaviour
 
     private NavMeshAgent agent;
     public Transform target;
+    public Transform trueTarget;
 
     public Animator animator;
 
 
     public bool isInRange;
     public bool isTouchingPlayer;
+    private bool isDead;
+    private float deadTimer;
+    public float deadTimerMax;
+
+    public Collider hand1, hand2, head;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //MeshRenderer = GetComponent<MeshRenderer>();
         agent = GetComponent<NavMeshAgent>();
         MeshRenderer.material = def;
+        trueTarget = target;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isInRange)
+
+        if (isDead)
         {
-            animator.SetBool("Walk", true);
-            animator.SetBool("Attack", false);
+            deadTimer += Time.deltaTime;
+            if (deadTimer >= deadTimerMax)
+                Destroy(gameObject);
+            return;
         }
-        else
+
+        if (agent.remainingDistance < 1.5f)
         {
+            Debug.Log("near");
             animator.SetBool("Walk", false);
             animator.SetBool("Attack", true);
-            transform.LookAt(target.position);
+            agent.isStopped = true;
         }
-        if (!isTouchingPlayer)
-            agent.SetDestination(target.position);
+        else if (agent.remainingDistance < 20)
+        {
+            Debug.Log("mid");
+            animator.SetBool("Walk", true);
+            animator.SetBool("Attack", false);
+            agent.isStopped = false;
+        }
         else
-            agent.SetDestination(transform.position);
-        isInRange = agent.remainingDistance < agent.stoppingDistance;
+        {
+            Debug.Log("far");
+            animator.SetBool("Walk", false);
+            animator.SetBool("Attack", false);
+            agent.isStopped = true;
+        }
+        agent.SetDestination(target.position);
+        transform.LookAt(target.position);
+
+        
 
 
 
         if (hp < 0)
         {
-            Destroy(gameObject);
+            animator.SetBool("Die", true);
+            gameObject.tag = "EnemyDead";
+            MeshRenderer.material = def;
+            Destroy(gameObject.GetComponent<Collider>());
+            Destroy(hand1);
+            Destroy(hand2);
+            Destroy(head);
+            isDead = true;
         }
 
         if (!isInside && hp != 0)
@@ -67,6 +100,7 @@ public class InfectedEnemy : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
+        if (isDead) return;
         if (other.gameObject.CompareTag("Sword"))
         {
             hp -= hurtAmount;
@@ -75,22 +109,14 @@ public class InfectedEnemy : MonoBehaviour
     }
     public void OnTriggerStay(Collider other)
     {
+        if (isDead) return;
         if (other.gameObject.CompareTag("Sword"))
             isInside = true;
     }
     public void OnTriggerExit(Collider other)
     {
+        if (isDead) return;
         if (other.gameObject.CompareTag("Sword") && hp != 0)
             MeshRenderer.material = def;
-    }
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-            isTouchingPlayer = true;
-    }
-    public void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-            isTouchingPlayer = false;
     }
 }

@@ -135,9 +135,14 @@ MonoBehaviour:
   hur: {fileID: 2100000, guid: 6bfeb21d3d239634081601c20ff3133e, type: 2}
   isInside: 0
   target: {fileID: 0}
+  trueTarget: {fileID: 0}
   animator: {fileID: 4963414278331536916}
   isInRange: 0
   isTouchingPlayer: 0
+  deadTimerMax: 10
+  hand1: {fileID: 871354670655045360}
+  hand2: {fileID: 5476233234660670480}
+  head: {fileID: 8738787625963946913}
 --- !u!195 &258650735259954156
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -152,7 +157,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 1200
-  m_StoppingDistance: 1.8
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -232,6 +237,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -91.792
       objectReference: {fileID: 0}
+    - target: {fileID: -1781356600409242780, guid: 192f6355252cb974f928e9cdbfe95f48, type: 3}
+      propertyPath: m_TagString
+      value: EnemyHead
+      objectReference: {fileID: 0}
+    - target: {fileID: -290750445479886849, guid: 192f6355252cb974f928e9cdbfe95f48, type: 3}
+      propertyPath: m_TagString
+      value: EnemyHand
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 192f6355252cb974f928e9cdbfe95f48, type: 3}
       propertyPath: m_Name
       value: model
@@ -247,6 +260,10 @@ PrefabInstance:
     - target: {fileID: 2563496969622287784, guid: 192f6355252cb974f928e9cdbfe95f48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 84.011
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948933247560734027, guid: 192f6355252cb974f928e9cdbfe95f48, type: 3}
+      propertyPath: m_TagString
+      value: EnemyHand
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

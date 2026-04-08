@@ -196,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (HP ==0)
+        if (HP <= 0)
         {
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             StartCoroutine(FadeIn());
@@ -491,13 +491,28 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "nextlevelportal")
+        if (other.gameObject.CompareTag("nextlevelportal"))
         {
             Invoke(nameof(levelEnd), 3f);
             ended = true;
         }
-            
+        if (other.gameObject.CompareTag("EnemyHead"))
+        {
+            HP--;
+        }
+        if (other.gameObject.CompareTag("EnemyHand"))
+        {
+            HP -= 0.25f;
+        }
     }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("EnemyHead"))
+        {
+            HP -= 0.5f;
+        }
+    }
+
     void levelEnd()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1); 
