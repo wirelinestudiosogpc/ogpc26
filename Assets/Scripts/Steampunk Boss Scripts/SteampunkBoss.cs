@@ -203,12 +203,12 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
-            stallTimer = 1;
+            stallTimer = 1.5f;
             setTimer = true;
         }
-        if (parry && stallTimer > 0.5f)
+        if (parry && stallTimer > 0.25f)
         {   
-            stallTimer = 0.5f;
+            stallTimer = 0.25f;
             CounterAttack.SetActive(true);
         }
 
@@ -295,7 +295,7 @@ public class SteampunkBoss : MonoBehaviour
             TargetPosition = Player.transform.position;
             setposition = true;
         }
-        if (stallTimer >= 2.2f && randomNumber == 2)
+        if (stallTimer >= 2.2f)
         {
             transform.position = Vector3.MoveTowards(transform.position, TargetPosition, -50 * Time.deltaTime);
         }
@@ -316,16 +316,16 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
-            stallTimer = 1.2f;
+            stallTimer = 1.3f;
             setTimer = true;
         }
-       if (parry && stallTimer > 0.5f)
+       if (parry && stallTimer > 0.25f)
         {   
-            stallTimer = 0.5f;
+            stallTimer = 0.25f;
             CounterAttack.SetActive(true);
         }
 
-        if (stallTimer < 0.6f && stallTimer > 0.3f)
+        if (stallTimer < 0.65f && stallTimer > 0.3f)
         {
             SlashHitbox.SetActive(true);
         }
