@@ -51,8 +51,8 @@ public class PlayerCam : MonoBehaviour
             sens = Sensitivity.value;
             if (canLook)
             {
-                yRotation += lookInput.x * sens * 50 * Time.deltaTime;
-                xRotation -= lookInput.y * sens * 50 * Time.deltaTime;
+                yRotation += lookInput.x * sens * 25 * Time.deltaTime;
+                xRotation -= lookInput.y * sens * 25 * Time.deltaTime;
             }
             
 

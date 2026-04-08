@@ -78,7 +78,6 @@ public class InfectedEnemy : MonoBehaviour
         {
             animator.SetBool("Die", true);
             gameObject.tag = "EnemyDead";
-            MeshRenderer.material = def;
             Destroy(gameObject.GetComponent<Collider>());
             Destroy(hand1);
             Destroy(hand2);
