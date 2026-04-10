@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using System.Collections;
 
 public class MenuControls : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class MenuControls : MonoBehaviour
     Resolution[] resolutions;
     bool isFullscreen;
     int selectedResolution;
-    List<Resolution> selectedResolutionList = new List<Resolution>();
+    List<Resolution> selectedResolutionList = new();
 
 
 
@@ -154,10 +155,18 @@ public class MenuControls : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        StartCoroutine(LoadAsync());
     }
+    IEnumerator LoadAsync()
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
 
-
+        while (!operation.isDone)
+        {
+            yield return null;
+        }
+    }
     public void QuitGame()
     {
         Application.Quit();
@@ -187,7 +196,7 @@ public class MenuControls : MonoBehaviour
 
     public void Website()
     {
-        Application.OpenURL("https://wiiirhung.com");
+        Application.OpenURL("https://wirelinestudios.com");
     }
 
 }

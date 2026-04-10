@@ -29317,7 +29317,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 767
+  m_VersionIndex: 773
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -32242,8 +32242,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 7299890659799552409}
   m_HandleRect: {fileID: 9001487541713052364}
   m_Direction: 0
-  m_MinValue: 0.5
-  m_MaxValue: 3
+  m_MinValue: 0.1
+  m_MaxValue: 6
   m_WholeNumbers: 0
   m_Value: 1.75558
   m_OnValueChanged:

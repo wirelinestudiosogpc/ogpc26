@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     
     public Image fadeInImg;
     public float fadeInTimer = 1f;
-    IEnumerator FadeIn()
+    public IEnumerator FadeIn()
     {
         float timer = 0f;
         Color currentColor = fadeInImg.color;
@@ -120,7 +120,11 @@ public class PlayerMovement : MonoBehaviour
         
         currentColor.a = 1f;
         fadeInImg.color = currentColor;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (HP <= 0)
+        {
+            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex));
+        }
     }
     void PlayerInputs()
     {
@@ -493,8 +497,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("nextlevelportal"))
         {
-            Invoke(nameof(levelEnd), 3f);
-            ended = true;
+            //Invoke(nameof(levelEnd), 3f);
+            //ended = true;
         }
         if (other.gameObject.CompareTag("EnemyHead"))
         {
@@ -513,8 +517,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void levelEnd()
+    public void levelEnd()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1); 
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Invoke(nameof(levelEnd2), 3f);
+    }
+    void levelEnd2()
+    {
+        Debug.Log(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+    IEnumerator LoadAsync(int sceneInt)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneInt);
+
+        while (!operation.isDone)
+        {
+            yield return null;
+        }
     }
 }
