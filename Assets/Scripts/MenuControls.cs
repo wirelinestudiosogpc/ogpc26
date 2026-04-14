@@ -9,6 +9,13 @@ using System.Collections;
 public class MenuControls : MonoBehaviour
 {
 
+
+
+
+    public Button main, settings, credits;
+
+
+
     public TMP_Dropdown resSelect;
     public Toggle fsToggle;
 
@@ -100,9 +107,9 @@ public class MenuControls : MonoBehaviour
 
 
 
-        
 
 
+        main.Select();
     }
 
     public void ChangeResolution()
@@ -176,22 +183,26 @@ public class MenuControls : MonoBehaviour
     {
         mainCanvas.enabled = false;
         settingsCanvas.enabled = true;
+        settings.Select();
     }
     public void CloseSettings()
     {
         settingsCanvas.enabled = false;
         mainCanvas.enabled = true;
+        main.Select();
     }
 
     public void OpenCredits()
     {
         mainCanvas.enabled = false;
         creditsCanvas.enabled = true;
+        credits.Select();
     }
     public void CloseCredits()
     {
         creditsCanvas.enabled = false;
         mainCanvas.enabled = true;
+        main.Select();
     }
 
     public void Website()

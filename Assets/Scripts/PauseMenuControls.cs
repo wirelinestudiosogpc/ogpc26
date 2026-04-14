@@ -8,6 +8,9 @@ using UnityEditor;
 public class PauseMenuControls : MonoBehaviour
 {
 
+
+    public Button main, settings;
+
     public TMP_Dropdown resSelect;
     public Toggle fsToggle;
 
@@ -165,10 +168,12 @@ public class PauseMenuControls : MonoBehaviour
     {
         pauseCanvas.SetActive(false);
         settingsCanvas.SetActive(true);
+        settings.Select();
     }
     public void CloseSettings()
     {
         settingsCanvas.SetActive(false);
         pauseCanvas.SetActive(true);
+        main.Select();
     }
 }

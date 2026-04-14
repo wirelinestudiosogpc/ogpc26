@@ -133,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
         {
             uiController.GetComponent<PauseMenuControls>().mainCanvas.SetActive(false);
             uiController.GetComponent<PauseMenuControls>().pauseCanvas.SetActive(true);
+            uiController.GetComponent<PauseMenuControls>().main.Select();
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
