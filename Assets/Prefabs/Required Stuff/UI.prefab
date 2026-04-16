@@ -750,7 +750,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press E
+  m_text: Press F / Y
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f857575bcd986b7438ab15865b592417, type: 2}
   m_sharedMaterial: {fileID: 3585603029361504689, guid: f857575bcd986b7438ab15865b592417, type: 2}
@@ -4269,7 +4269,7 @@ GameObject:
   - component: {fileID: 7415372563894319513}
   - component: {fileID: 7330422838257075104}
   m_Layer: 5
-  m_Name: MiniMap
+  m_Name: MiniMap1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

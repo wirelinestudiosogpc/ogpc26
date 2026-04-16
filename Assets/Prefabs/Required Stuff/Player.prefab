@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798988044940632333}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 528.48, y: 33.19, z: 179.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -139,31 +139,6 @@ MonoBehaviour:
   playerCam: {fileID: 7928292211366166186}
   canWalk: 0
   running: 0
-  pauseGameButton:
-    m_Name: Pause Game Button
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 49cd2f40-ae6d-4fd7-92aa-50607eb4c56a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: d6b0b589-c4cc-409e-96b9-a4127e92dc9f
-      m_Path: <Keyboard>/escape
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Pause Game Button
-      m_Flags: 0
-    - m_Name: 
-      m_Id: f0bde0b8-dc0c-4237-914d-9391afb4a290
-      m_Path: <Gamepad>/start
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Pause Game Button
-      m_Flags: 0
-    m_Flags: 0
   orientation: {fileID: 7167304790069862353}
   cameraor: {fileID: 3554963389451353205}
   cinemachineCam: {fileID: 0}
