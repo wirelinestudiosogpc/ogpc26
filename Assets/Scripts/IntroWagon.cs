@@ -31,7 +31,6 @@ public class IntroWagon : MonoBehaviour
     void Start()
     {
         previousSourceRotation = transform.rotation;
-
     }
 
     IEnumerator FadeIn()

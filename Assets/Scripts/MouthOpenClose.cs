@@ -25,7 +25,6 @@ public class MouthOpenClose : MonoBehaviour
     public string whatToSay;
     private void Start()
     {
-        player = GameObject.Find("Player");
         npc.GetComponent<SkinnedMeshRenderer>().material = closedMouth;
         isClosed = true;
         timer = initialTimer;

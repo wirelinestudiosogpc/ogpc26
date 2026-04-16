@@ -29,9 +29,6 @@ public class PlayerMovement : MonoBehaviour
     public bool running;
 
 
-    public InputAction pauseGameButton;
-
-
     public Transform orientation;
     public Transform cameraor;
 
@@ -90,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        cinemachineCam = GameObject.Find("CinemachineCamera");
         canWalk = true;
 
         jumpAction = playerInput.actions["Jump"];
