@@ -76,7 +76,7 @@ public class KangerBird : MonoBehaviour
         }
     }
 
-    void OnColliderStay(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Boss") && isStuck)
         {

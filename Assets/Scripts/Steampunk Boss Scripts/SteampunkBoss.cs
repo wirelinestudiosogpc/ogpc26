@@ -7,6 +7,7 @@ public class SteampunkBoss : MonoBehaviour
     public PlayerMovement playerMovement;
     public GameObject Player;
     public float HP;
+    public float deathTimer = 2;
     public int randomNumber = 0;
     public float stallTimer = 0;
     public bool setTimer = false;
@@ -45,7 +46,7 @@ public class SteampunkBoss : MonoBehaviour
             randomNumber = Random.Range(1, 6);
             setTimer = false;
         }
-        else if (stallTimer <= 0)
+        else if (stallTimer <= 0 && HP <= 18 && HP > 0)
         {
             transform.LookAt(Player.transform);
             randomNumber = Random.Range(6, 9);
@@ -86,6 +87,18 @@ public class SteampunkBoss : MonoBehaviour
         }
 
         HPBar.sizeDelta = new Vector2(HP*7.8f, HPBar.sizeDelta.y);
+
+        if (HP <= 0)
+        {
+            randomNumber = 0;
+
+            deathTimer -= Time.deltaTime;
+
+            if (deathTimer <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 
     void JumpAttack()
@@ -250,7 +263,6 @@ public class SteampunkBoss : MonoBehaviour
         {
             jumpLungePhase = 2;
             TargetPosition = Player.transform.position;
-            transform.LookAt(Player.transform);
         }
         if (jumpLungePhase == 2)
         {
@@ -259,6 +271,7 @@ public class SteampunkBoss : MonoBehaviour
         if ((transform.position.y == 30) && jumpLungePhase == 2)
         {
             jumpLungePhase = 3;
+            transform.LookAt(Player.transform);
         }
         if (jumpLungePhase == 3)
         {
