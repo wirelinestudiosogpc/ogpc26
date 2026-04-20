@@ -24,6 +24,7 @@ public class SteampunkBoss : MonoBehaviour
 
     public bool parry = false;
     public GameObject CounterAttack;
+    public GameObject ParryStar;
 
     public GameObject SlashHitbox;
 
@@ -216,9 +217,15 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
+            Instantiate(ParryStar, new Vector3(transform.position.x + 0.3f, transform.position.y + 1.5f, transform.position.z + 0.75f), transform.rotation);
             stallTimer = 1.5f;
             setTimer = true;
         }
+        if (stallTimer < 1.3 && stallTimer > 1.2)
+        {
+            Destroy(GameObject.Find("Parry Star(Clone)"));
+        }
+
         if (parry && stallTimer > 0.25f)
         {   
             stallTimer = 0.25f;
