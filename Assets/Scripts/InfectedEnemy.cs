@@ -68,7 +68,7 @@ public class InfectedEnemy : MonoBehaviour
             agent.isStopped = true;
         }
         agent.SetDestination(target.position);
-        transform.LookAt(target.position);
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
 
         
 
