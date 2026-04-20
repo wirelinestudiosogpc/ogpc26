@@ -23,6 +23,7 @@ public class ThrowerEnemy : MonoBehaviour
     {
         MeshRenderer = GetComponent<MeshRenderer>();
         agent = GetComponent<NavMeshAgent>();
+        target = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame

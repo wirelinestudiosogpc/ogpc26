@@ -69,13 +69,13 @@ public class PauseMenuControls : MonoBehaviour
         else
         {
             Sensitivity.value = GameObject.FindGameObjectWithTag("Sens").GetComponent<SensitivityValue>().cameraSens;
-            compassRealistic.isOn = GameObject.FindGameObjectWithTag("Sens").GetComponent<SensitivityValue>().compass;
+            //compassRealistic.isOn = GameObject.FindGameObjectWithTag("Sens").GetComponent<SensitivityValue>().compass;
         }
 
         if (GameObject.FindGameObjectsWithTag("Sens").Length != 0)
         {
             GameObject.FindGameObjectWithTag("Sens").GetComponent<SensitivityValue>().cameraSens = Sensitivity.value;
-            GameObject.FindGameObjectWithTag("Sens").GetComponent<SensitivityValue>().compass = compassRealistic.isOn;
+            //GameObject.FindGameObjectWithTag("Sens").GetComponent<SensitivityValue>().compass = compassRealistic.isOn;
 
             var percent = ((Sensitivity.value - 0.5f) / (3f - 0.5f)) * 100;
             SensitvityShow.text = "Sensitivity: " + ((int)percent).ToString();
@@ -143,7 +143,7 @@ public class PauseMenuControls : MonoBehaviour
     {
         if (GameObject.FindGameObjectsWithTag("Sens").Length != 0)
         {
-            GameObject.FindGameObjectWithTag("Sens").GetComponent<SensitivityValue>().compass = compassRealistic.isOn;
+            //GameObject.FindGameObjectWithTag("Sens").GetComponent<SensitivityValue>().compass = compassRealistic.isOn;
 
             
         }

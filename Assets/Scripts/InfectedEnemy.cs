@@ -32,6 +32,7 @@ public class InfectedEnemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         MeshRenderer.material = def;
         trueTarget = target;
+        target = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
