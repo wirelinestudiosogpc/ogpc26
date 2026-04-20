@@ -53,7 +53,7 @@ public class IntroWagon : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         timer2 += Time.deltaTime;
         if (timer2 > 1.1 && timer2 < 1.2)
@@ -149,9 +149,9 @@ public class IntroWagon : MonoBehaviour
                 player.GetComponent<PlayerMovement>().energy = 0;
             }
         }
-    }
-    private void LateUpdate()
-    {
+    //}
+    //private void LateUpdate()
+    //{
         
         if (GameObject.FindGameObjectsWithTag("WagonPoint").Length > 0)
         {

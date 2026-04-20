@@ -118,8 +118,7 @@ public class PlayerMovement : MonoBehaviour
         fadeInImg.color = currentColor;
         if (HP <= 0)
         {
-            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-            StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex));
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
     void PlayerInputs()
@@ -522,8 +521,9 @@ public class PlayerMovement : MonoBehaviour
     void levelEnd2()
     {
         Debug.Log(SceneManager.GetActiveScene().buildIndex + 1);
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-        StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex + 1));
+        //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        //StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex + 1));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     IEnumerator LoadAsync(int sceneInt)
     {
