@@ -162,13 +162,13 @@ public class IntroWagon : MonoBehaviour
 
             uiElement1.SetActive(false);
             uiElement2.SetActive(false);
-            uiElement3.SetActive(false);
+            //uiElement3.SetActive(false);
         }
         if (GameObject.FindGameObjectsWithTag("WagonPoint").Length == 0 && !endDoDone && timer1 > 1.1)
         {
             uiElement1.SetActive(true);
             uiElement2.SetActive(true);
-            uiElement3.SetActive(true);
+            //uiElement3.SetActive(true);
             endDoDone = true;
         }
     }
