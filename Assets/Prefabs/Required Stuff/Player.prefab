@@ -45,7 +45,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.8
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -301,14 +301,6 @@ MonoBehaviour:
   healthUI: {fileID: 0}
   uiController: {fileID: 0}
   playerInput: {fileID: 3776536375747142099}
-  jump: {fileID: 8300000, guid: 2fe706d975842244facfb78c8201c6de, type: 3}
-  slash: {fileID: 8300000, guid: d614f6e5bd17977489e1826dfc7f3b53, type: 3}
-  dash: {fileID: 8300000, guid: 6b1268b154b05e047ad5863e86e8524c, type: 3}
-  die: {fileID: 8300000, guid: 902d2c8735b723041bd7a05331d4d505, type: 3}
-  playerHurt: {fileID: 8300000, guid: bb8cf9a71b0d125418c71cd0f4b9d405, type: 3}
-  enemyHurt: {fileID: 8300000, guid: 7fe674e394ab3ad4fb0caa059d92536d, type: 3}
-  kill: {fileID: 8300000, guid: 7fe674e394ab3ad4fb0caa059d92536d, type: 3}
-  win: {fileID: 8300000, guid: 2fe706d975842244facfb78c8201c6de, type: 3}
   fadeInImg: {fileID: 0}
   fadeInTimer: 1
 --- !u!114 &3776536375747142099

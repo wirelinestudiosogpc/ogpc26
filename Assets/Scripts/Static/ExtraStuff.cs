@@ -11,11 +11,11 @@ public static class AudioStuff
     public static AudioClip sfxEnemyHurt = Resources.Load<AudioClip>("sfx/enemy_hurt");
     public static AudioClip sfxLevelEnd = Resources.Load<AudioClip>("sfx/jump");
 
-    public static void PlaySFX(AudioClip clip, Transform objParent)
+    public static void PlaySFX(AudioClip clip, Transform parent)
     {
         GameObject obj = new();
-        obj.transform.position = objParent.position;
-        obj.transform.SetParent(objParent);
+        obj.transform.position = parent.position;
+        obj.transform.SetParent(parent);
         obj.name = $"SFX_{clip.name}";
         AudioSource source = obj.AddComponent<AudioSource>();
         source.clip = clip;

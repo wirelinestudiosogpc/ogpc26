@@ -23,6 +23,7 @@ public class MouthOpenClose : MonoBehaviour
     public float initialTimerDeactivate;
     public bool isClosed;
     public string whatToSay;
+    public AudioSource murmur;
     private void Start()
     {
         npc.GetComponent<SkinnedMeshRenderer>().material = closedMouth;
@@ -109,6 +110,7 @@ public class MouthOpenClose : MonoBehaviour
             if (timerDeactivate <= 0)
             {
                 text.SetActive(false);
+                murmur.Stop();
                 interacted = false;
             }
             
@@ -133,12 +135,14 @@ public class MouthOpenClose : MonoBehaviour
             interacted = true;
             prompt.SetActive(false);
             text.SetActive(true);
+            murmur.Play();
             text.GetComponent<TextMeshProUGUI>().text = whatToSay;
             timerDeactivate = initialTimerDeactivate;
         }
         if (context.performed && context.interaction is HoldInteraction)
         {
             text.SetActive(false);
+            murmur.Stop();
             interacted = false;
         }
         
