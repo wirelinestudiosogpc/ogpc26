@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.XR;
+using static AudioStuff;
 
 public class InfectedEnemy : MonoBehaviour
 {
@@ -83,6 +84,7 @@ public class InfectedEnemy : MonoBehaviour
             Destroy(hand1);
             Destroy(hand2);
             Destroy(head);
+            PlaySFX(sfxEnemyDie, transform);
             isDead = true;
         }
 
@@ -105,6 +107,7 @@ public class InfectedEnemy : MonoBehaviour
         {
             hp -= hurtAmount;
             MeshRenderer.material = hur;
+            PlaySFX(sfxEnemyHurt, transform);
         }
     }
     public void OnTriggerStay(Collider other)

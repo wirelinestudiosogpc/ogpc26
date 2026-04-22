@@ -8,6 +8,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using static AudioStuff;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -79,6 +80,9 @@ public class PlayerMovement : MonoBehaviour
     InputAction jumpAction, walkAction, attackAction, pauseAction, runAction, lookAction;
 
     bool ended;
+
+
+
 
     private void Awake()
     {
@@ -180,6 +184,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 dashDistance = Mathf.Floor(dashDistanceTimer * 8);
                 dashDuration = 15;
+                PlaySFX(sfxDash, transform);
             }
             dashDistanceTimer = 0;
         }
@@ -188,6 +193,7 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = running ? Mathf.Sqrt(runJumpHeight * -1f * gravity) : Mathf.Sqrt(jumpHeight * -1f * gravity);
             jumped = true;
+            PlaySFX(sfxJump, transform);
         }
         if (jumpAction.WasReleasedThisFrame() && !controller.isGrounded)
         {
@@ -201,6 +207,7 @@ public class PlayerMovement : MonoBehaviour
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             StartCoroutine(FadeIn());
             HP--;
+            PlaySFX(sfxPlayerDie, transform);
         }
         PlayerInputs();
 
@@ -258,6 +265,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     dashDistance = Mathf.Floor(dashDistanceTimer * 8);
                     dashDuration = 15;
+                    PlaySFX(sfxDash, transform);
                 }
                 dashDistanceTimer = 0;
             }
@@ -460,6 +468,7 @@ public class PlayerMovement : MonoBehaviour
             lastSwing = 3;
             timeSinceLastSwing = 0;
         }
+        PlaySFX(sfxSlash, transform);
     }
 
     private void MovePlayer()
@@ -499,6 +508,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyHead"))
         {
             HP--;
+            PlaySFX(sfxPlayerHurt, transform);
         }
         if (other.gameObject.CompareTag("EnemyHand"))
         {
@@ -523,6 +533,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         //StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex + 1));
+        PlaySFX(sfxLevelEnd, transform);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     IEnumerator LoadAsync(int sceneInt)
