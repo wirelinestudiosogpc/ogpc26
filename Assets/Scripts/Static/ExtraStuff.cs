@@ -20,6 +20,6 @@ public static class AudioStuff
         AudioSource source = obj.AddComponent<AudioSource>();
         source.clip = clip;
         source.Play();
-        UnityEngine.Object.Destroy(obj, clip.length);
+        Object.Destroy(obj, clip.length);
     }
 }
