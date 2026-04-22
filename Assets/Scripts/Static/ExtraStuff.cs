@@ -7,8 +7,8 @@ public static class AudioStuff
     public static AudioClip sfxDash = Resources.Load<AudioClip>("sfx/dash");
     public static AudioClip sfxPlayerDie = Resources.Load<AudioClip>("sfx/loss");
     public static AudioClip sfxPlayerHurt = Resources.Load<AudioClip>("sfx/player_hurt");
-    public static AudioClip sfxEnemyHurt = Resources.Load<AudioClip>("sfx/enemy_hurt");
     public static AudioClip sfxEnemyDie = Resources.Load<AudioClip>("sfx/enemy_hurt");
+    public static AudioClip sfxEnemyHurt = Resources.Load<AudioClip>("sfx/enemy_hurt");
     public static AudioClip sfxLevelEnd = Resources.Load<AudioClip>("sfx/jump");
 
     public static void PlaySFX(AudioClip clip, Transform objParent)
