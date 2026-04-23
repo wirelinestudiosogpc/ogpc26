@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public static class AudioStuff
@@ -52,5 +53,20 @@ public static class AudioStuff
             source.loop = true;
         else
             Object.Destroy(obj, clip.length);
+    }
+    public static IEnumerator LoopSFX(AudioClip clip, Transform parent, int loopCount)
+    {
+        GameObject obj = new();
+        obj.transform.position = parent.position;
+        obj.transform.SetParent(parent);
+        obj.name = $"SFX_{clip.name}";
+        AudioSource source = obj.AddComponent<AudioSource>();
+        source.clip = clip;
+        for (int i = 0; i < loopCount; i++)
+        {
+            source.Play();
+            yield return new WaitForSeconds(clip.length);
+        }
+        Object.Destroy(obj, clip.length);
     }
 }
