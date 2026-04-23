@@ -1,4 +1,5 @@
 using UnityEngine;
+using static AudioStuff;
 
 public class MainBossHittbox : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class MainBossHittbox : MonoBehaviour
         {
             Debug.Log("Hit Player");
             playerMovement.HP -= 1;
+            PlaySFX(sfxPlayerHurt, playerMovement.gameObject.transform);
         }
         if (other.CompareTag("Sword") && (steampunkBoss.randomNumber == 5 || steampunkBoss.randomNumber == 8) && !steampunkBoss.parry)
         {

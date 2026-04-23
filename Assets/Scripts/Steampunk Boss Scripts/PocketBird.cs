@@ -1,4 +1,5 @@
  using UnityEngine;
+using static AudioStuff;
 
 public class PocketBird : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class PocketBird : MonoBehaviour
         {
             Debug.Log("Bird Hit Player");
             playerMovement.HP -= 2f;
+            PlaySFX(sfxPlayerHurt, playerMovement.gameObject.transform);
             GameObject.Destroy(this.gameObject);
         }
         else if (other.CompareTag("Boss")){

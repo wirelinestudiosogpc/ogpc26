@@ -1,4 +1,5 @@
 using UnityEngine;
+using static AudioStuff;
 
 public class CounterAttack : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class CounterAttack : MonoBehaviour
         {
             Debug.Log("Hit Player");
             playerMovement.HP -= 2;
+            PlaySFX(sfxPlayerHurt, playerMovement.gameObject.transform);
         }
         else{
             Debug.Log("Failed");

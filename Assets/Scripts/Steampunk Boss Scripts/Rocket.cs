@@ -1,4 +1,5 @@
  using UnityEngine;
+using static AudioStuff;
 
 public class Rocket : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class Rocket : MonoBehaviour
         {
             Debug.Log("Rocket Hit Player");
             playerMovement.HP -= 2f;
+            PlaySFX(sfxPlayerHurt, playerMovement.gameObject.transform);
         }
         else if (other.CompareTag("Boss")){
             Debug.Log("Shooting");

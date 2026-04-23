@@ -1,4 +1,5 @@
 using UnityEngine;
+using static AudioStuff;
 
 public class LungeHitbox : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class LungeHitbox : MonoBehaviour
         {
             Debug.Log("Hit Player");
             playerMovement.HP -= 1.5f;
+            PlaySFX(sfxPlayerHurt, playerMovement.gameObject.transform);
         }
         else{
             Debug.Log("Failed");

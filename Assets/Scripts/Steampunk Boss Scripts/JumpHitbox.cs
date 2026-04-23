@@ -1,4 +1,5 @@
 using UnityEngine;
+using static AudioStuff;
 
 public class JumpHitbox : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class JumpHitbox : MonoBehaviour
         {
             Debug.Log("Hit Player");
             playerMovement.HP -= 1;
+            PlaySFX(sfxPlayerHurt, playerMovement.gameObject.transform);
         }
         else{
             Debug.Log("Failed");
