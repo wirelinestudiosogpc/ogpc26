@@ -39,4 +39,18 @@ public static class AudioStuff
         source.Play();
         Object.Destroy(obj, clip.length);
     }
+    public static void PlaySFX(AudioClip clip, Transform parent, bool loop)
+    {
+        GameObject obj = new();
+        obj.transform.position = parent.position;
+        obj.transform.SetParent(parent);
+        obj.name = $"SFX_{clip.name}";
+        AudioSource source = obj.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.Play();
+        if (loop)
+            source.loop = true;
+        else
+            Object.Destroy(obj, clip.length);
+    }
 }
