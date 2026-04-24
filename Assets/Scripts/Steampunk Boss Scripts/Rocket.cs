@@ -45,7 +45,7 @@ public class Rocket : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Rocket Hit Player");
-            playerMovement.HP -= 2f;
+            playerMovement.HP -= 0.5f;
             PlaySFX(sfxPlayerHurt, 100, playerMovement.gameObject.transform);
         }
         else if (other.CompareTag("Boss")){

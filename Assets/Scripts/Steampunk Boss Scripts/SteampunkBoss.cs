@@ -27,6 +27,7 @@ public class SteampunkBoss : MonoBehaviour
     public GameObject CounterAttack;
     public GameObject ParryStar;
 
+    public bool slashed = false;
     public GameObject SlashHitbox;
 
     public int jumpLungePhase;
@@ -92,12 +93,17 @@ public class SteampunkBoss : MonoBehaviour
 
         if (HP <= 0)
         {
-            randomNumber = 0;
+            if (randomNumber > 0)
+            {
+                PlaySFX(sfxBossKilled, 100, transform);
+                randomNumber = 0;
+            }
 
             deathTimer -= Time.deltaTime;
 
             if (deathTimer <= 0)
             {
+                
                 Destroy(this.gameObject);
             }
         }
@@ -107,6 +113,7 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
+            PlaySFX(sfxBoss1, 100, transform);
             stallTimer = 1;
             setTimer = true;
         }
@@ -136,6 +143,7 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
+            PlaySFX(sfxBirdThrow, 100, transform);
             stallTimer = 3;
             setTimer = true;
         }
@@ -165,6 +173,7 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
+            PlaySFX(sfxBoss2, 100, transform);
             stallTimer = 0.5f;
             setTimer = true;
         }
@@ -199,18 +208,24 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
+            PlaySFX(sfxMurmur, 100, transform, 1.5f);
             stallTimer = 1.5f;
             setTimer = true;
         }
-        if (stallTimer < 1 && stallTimer > 0.5)
+        if (stallTimer < 1 && stallTimer > 0.5 && !slashed)
         {
+            PlaySFX(sfxBossSlash, 100, transform);
+            slashed = true;
             SlashHitbox.SetActive(true);
         }
         else if (stallTimer < 0.5)
         {
             SlashHitbox.SetActive(false);
         }
-
+        if (stallTimer <= 0)
+        {
+            slashed = false;
+        }
         stallTimer -= Time.deltaTime;
     }
 
@@ -218,6 +233,7 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
+            PlaySFX(sfxBossParry, 100, transform);
             Instantiate(ParryStar, new Vector3(transform.position.x + 0.3f, transform.position.y + 1.5f, transform.position.z + 0.75f), transform.rotation);
             stallTimer = 1.5f;
             setTimer = true;
@@ -245,6 +261,7 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
+            PlaySFX(sfxBoss1, 100, transform);
             stallTimer = 1;
             setTimer = true;
         }
@@ -308,6 +325,7 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
+            PlaySFX(sfxBirdThrow, 100, transform);
             stallTimer = 2.5f;
             setTimer = true;
         }
@@ -337,6 +355,7 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
+            PlaySFX(sfxBossParry, 100, transform);
             stallTimer = 1.3f;
             setTimer = true;
         }
