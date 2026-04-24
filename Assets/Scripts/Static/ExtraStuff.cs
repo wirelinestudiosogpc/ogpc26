@@ -93,7 +93,7 @@ public static class AudioStuff
         GameObject obj = new();
         obj.transform.position = parent.position;
         obj.transform.SetParent(parent);
-        obj.name = $"audio_{clip.name}";
+        obj.name = $"audio_{clip.name}_loop_{loopCount}_times";
         AudioSource source = obj.AddComponent<AudioSource>();
         source.clip = clip;
         source.loop = true;
