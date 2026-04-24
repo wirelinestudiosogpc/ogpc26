@@ -28,12 +28,14 @@ public class MainBossHittbox : MonoBehaviour
         }
         if (other.CompareTag("Sword") && (steampunkBoss.randomNumber == 5 || steampunkBoss.randomNumber == 8) && !steampunkBoss.parry)
         {
+            PlaySFX(sfxBossGotcha, 100, transform);
             Debug.Log("Parried");
             transform.LookAt(Player.transform);
             steampunkBoss.parry = true;
         }
         else if (other.gameObject.tag == "Sword")
         {
+            PlaySFX(sfxBossHurt, 100, transform);
             steampunkBoss.HP -= 1;
             Debug.Log("Hit");
         }

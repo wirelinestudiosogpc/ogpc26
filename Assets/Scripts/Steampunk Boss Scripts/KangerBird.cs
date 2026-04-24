@@ -50,6 +50,7 @@ public class KangerBird : MonoBehaviour
         }
         else if (playerDistance <= 10 && !isStuck)
         {
+            PlaySFX(sfxBirdSplit, 100, transform);
             Instantiate(PocketBird, transform.position, transform.rotation);
             Instantiate(PocketBird, transform.position, transform.rotation * Quaternion.Euler(0, -30, 0));
             Instantiate(PocketBird, transform.position, transform.rotation * Quaternion.Euler(0, 30, 0));
