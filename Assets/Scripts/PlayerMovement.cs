@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         pauseAction = playerInput.actions["Pause"];
         runAction = playerInput.actions["Run"];
         lookAction = playerInput.actions["Look"];
-        PlaySFX(music[SceneManager.GetActiveScene().buildIndex], 20, transform, true);
+        PlaySFX(music[SceneManager.GetActiveScene().buildIndex-1], 20, transform, true);
     }
     
     public Image fadeInImg;
