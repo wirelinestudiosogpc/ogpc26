@@ -203,6 +203,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        if (transform.position.y < -100)
+            HP = -50;
         if (HP <= 0 && HP > -200)
         {
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

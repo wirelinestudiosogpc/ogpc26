@@ -57,7 +57,7 @@ public static class AudioStuff
         source.Play();
         Object.Destroy(obj, clip.length);
     }
-    public static void PlaySFX(AudioClip clip, float volume, Transform parent, bool loop)
+    public static void PlaySFX(AudioClip clip, float volume, Transform parent, bool loopForever)
     {
         GameObject obj = new();
         obj.transform.position = parent.position;
@@ -66,7 +66,7 @@ public static class AudioStuff
         source.clip = clip;
         source.volume = volume/100;
         source.Play();
-        if (loop)
+        if (loopForever)
         {
             obj.name = $"audio_{clip.name}_loop";
             source.loop = true;
