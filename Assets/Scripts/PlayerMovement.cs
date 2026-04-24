@@ -203,11 +203,11 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (HP <= 0)
+        if (HP <= 0 && HP > -200)
         {
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             StartCoroutine(FadeIn());
-            HP--;
+            HP = -500;
             PlaySFX(sfxPlayerDie, 100, transform);
         }
         PlayerInputs();
