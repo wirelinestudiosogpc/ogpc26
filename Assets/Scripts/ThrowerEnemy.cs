@@ -81,5 +81,6 @@ public class ThrowerEnemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Sword" && hp != 0)
             MeshRenderer.material = def;
+            
     }
 }
