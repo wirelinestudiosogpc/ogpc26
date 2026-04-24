@@ -83,25 +83,22 @@ public static class AudioStuff
         obj.name = $"audio_{clip.name}_loop_{loopTime}_seconds";
         AudioSource source = obj.AddComponent<AudioSource>();
         source.clip = clip;
-        source.volume = volume/100;
+        source.volume = volume / 100;
         source.loop = true;
         source.Play();
         Object.Destroy(obj, loopTime);
     }
-    public static IEnumerator LoopSFX(AudioClip clip, float volume, Transform parent, int loopCount)
+    public static void PlaySFX(AudioClip clip, float volume, Transform parent, int loopCount)
     {
         GameObject obj = new();
         obj.transform.position = parent.position;
         obj.transform.SetParent(parent);
-        obj.name = $"audio_{clip.name}_loop_{loopCount}_times";
+        obj.name = $"audio_{clip.name}";
         AudioSource source = obj.AddComponent<AudioSource>();
         source.clip = clip;
-        source.volume = volume/100;
-        for (int i = 0; i < loopCount; i++)
-        {
-            source.Play();
-            yield return new WaitForSeconds(clip.length);
-        }
-        Object.Destroy(obj, clip.length);
+        source.loop = true;
+        source.volume = volume / 100;
+        source.Play();
+        Object.Destroy(obj, clip.length * loopCount);
     }
 }
