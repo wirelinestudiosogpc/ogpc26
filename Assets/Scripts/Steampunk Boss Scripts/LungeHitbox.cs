@@ -22,7 +22,7 @@ public class LungeHitbox : MonoBehaviour
         {
             Debug.Log("Hit Player");
             playerMovement.HP -= 1.5f;
-            PlaySFX(sfxPlayerHurt, playerMovement.gameObject.transform);
+            PlaySFX(sfxPlayerHurt, 100, playerMovement.gameObject.transform);
         }
         else{
             Debug.Log("Failed");

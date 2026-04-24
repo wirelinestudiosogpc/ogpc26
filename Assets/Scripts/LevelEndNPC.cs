@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.SceneManagement;
+using static AudioStuff;
 
 public class LevelEndNPC : MonoBehaviour
 {
@@ -24,12 +25,15 @@ public class LevelEndNPC : MonoBehaviour
     public float initialTimerDeactivate;
     public bool isClosed;
     public string whatToSay, whatToSay2;
+    public Transform audioParent;
     private void Start()
     {
         player = GameObject.Find("Player");
         npc.GetComponent<SkinnedMeshRenderer>().material = closedMouth;
         isClosed = true;
         timer = initialTimer;
+        audioParent = new GameObject().transform;
+        audioParent.SetParent(transform);
     }
     void Update()
     {
@@ -139,10 +143,12 @@ public class LevelEndNPC : MonoBehaviour
             if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
             {
                 text.GetComponent<TextMeshProUGUI>().text = whatToSay;
+                PlaySFX(sfxMurmur, 100, audioParent, initialTimerDeactivate);
             }
             else
             {
                 text.GetComponent<TextMeshProUGUI>().text = whatToSay2;
+                PlaySFX(sfxMurmur, 100, audioParent, initialTimerDeactivate);
                 Invoke(nameof(nextLevelGo), 3f);
             }
             timerDeactivate = initialTimerDeactivate;
@@ -150,6 +156,8 @@ public class LevelEndNPC : MonoBehaviour
         if (context.performed && context.interaction is HoldInteraction)
         {
             text.SetActive(false);
+            if (audioParent.childCount != 0)
+                Destroy(audioParent.GetChild(0).gameObject);
             interacted = false;
         }
 

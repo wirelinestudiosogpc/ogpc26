@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using static AudioStuff;
 
 public class MouthOpenClose : MonoBehaviour
 {
@@ -23,12 +24,14 @@ public class MouthOpenClose : MonoBehaviour
     public float initialTimerDeactivate;
     public bool isClosed;
     public string whatToSay;
-    public AudioSource murmur;
+    public Transform audioParent;
     private void Start()
     {
         npc.GetComponent<SkinnedMeshRenderer>().material = closedMouth;
         isClosed = true;
         timer = initialTimer;
+        audioParent = new GameObject().transform;
+        audioParent.SetParent(transform);
     }
     void Update()
     {
@@ -110,7 +113,6 @@ public class MouthOpenClose : MonoBehaviour
             if (timerDeactivate <= 0)
             {
                 text.SetActive(false);
-                murmur.Stop();
                 interacted = false;
             }
             
@@ -120,7 +122,8 @@ public class MouthOpenClose : MonoBehaviour
             npc.GetComponent<SkinnedMeshRenderer>().material = closedMouth;
             isClosed = true;
         }
-        if (text.GetComponent<TextMeshProUGUI>().text != whatToSay) interacted = false;
+        if (text.GetComponent<TextMeshProUGUI>().text != whatToSay)
+            interacted = false;
 
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -135,14 +138,15 @@ public class MouthOpenClose : MonoBehaviour
             interacted = true;
             prompt.SetActive(false);
             text.SetActive(true);
-            murmur.Play();
+            PlaySFX(sfxMurmur, 100, audioParent, initialTimerDeactivate);
             text.GetComponent<TextMeshProUGUI>().text = whatToSay;
             timerDeactivate = initialTimerDeactivate;
         }
         if (context.performed && context.interaction is HoldInteraction)
         {
             text.SetActive(false);
-            murmur.Stop();
+            if (audioParent.childCount != 0)
+                Destroy(audioParent.GetChild(0).gameObject);
             interacted = false;
         }
         

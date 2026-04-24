@@ -71,7 +71,7 @@ public class KangerBird : MonoBehaviour
         {
             Debug.Log("Hit Player");
             playerMovement.HP -= 2f;
-            PlaySFX(sfxPlayerHurt, playerMovement.gameObject.transform);
+            PlaySFX(sfxPlayerHurt, 100, playerMovement.gameObject.transform);
         }
         else if (other.CompareTag("Ground")){
             Destroy(this.gameObject);

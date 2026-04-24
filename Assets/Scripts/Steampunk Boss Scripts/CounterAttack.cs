@@ -22,7 +22,7 @@ public class CounterAttack : MonoBehaviour
         {
             Debug.Log("Hit Player");
             playerMovement.HP -= 2;
-            PlaySFX(sfxPlayerHurt, playerMovement.gameObject.transform);
+            PlaySFX(sfxPlayerHurt, 100, playerMovement.gameObject.transform);
         }
         else{
             Debug.Log("Failed");

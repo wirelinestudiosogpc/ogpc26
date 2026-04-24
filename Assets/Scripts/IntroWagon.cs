@@ -1,7 +1,9 @@
 using System.Collections;
 using TMPro;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UI;
+using static AudioStuff;
 
 public class IntroWagon : MonoBehaviour
 {
@@ -27,6 +29,7 @@ public class IntroWagon : MonoBehaviour
     public GameObject uiElement1;
     public GameObject uiElement2;
     public GameObject uiElement3;
+    bool ran1, ran2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -66,12 +69,17 @@ public class IntroWagon : MonoBehaviour
         }
         if (timer2 > 2.5 && timer2 < 2.6)
         {
-            npc.gameObject.GetComponent<MouthOpenClose>().interacted = true;
-            npc.gameObject.GetComponent<MouthOpenClose>().prompt.SetActive(false);
-            npc.gameObject.GetComponent<MouthOpenClose>().text.SetActive(true);
-            npc.gameObject.GetComponent<MouthOpenClose>().murmur.Play();
-            npc.gameObject.GetComponent<MouthOpenClose>().text.GetComponent<TextMeshProUGUI>().text = npc.gameObject.GetComponent<MouthOpenClose>().whatToSay;
-            npc.gameObject.GetComponent<MouthOpenClose>().timerDeactivate = npc.gameObject.GetComponent<MouthOpenClose>().initialTimerDeactivate;
+            if (!ran1)
+            {
+                ran1 = true;
+                npc.gameObject.GetComponent<MouthOpenClose>().interacted = true;
+                npc.gameObject.GetComponent<MouthOpenClose>().prompt.SetActive(false);
+                npc.gameObject.GetComponent<MouthOpenClose>().text.SetActive(true);
+                PlaySFX(sfxMurmur, 100, transform, npc.gameObject.GetComponent<MouthOpenClose>().initialTimerDeactivate);
+                npc.gameObject.GetComponent<MouthOpenClose>().text.GetComponent<TextMeshProUGUI>().text = npc.gameObject.GetComponent<MouthOpenClose>().whatToSay;
+                npc.gameObject.GetComponent<MouthOpenClose>().timerDeactivate = npc.gameObject.GetComponent<MouthOpenClose>().initialTimerDeactivate;
+            }
+            
         }
 
         
@@ -123,14 +131,18 @@ public class IntroWagon : MonoBehaviour
                 timer3 += Time.deltaTime;
                 if (timer3 > .8 && timer3 < .9)
                 {
-                    npc.GetComponent<MouthOpenClose>().whatToSay = "You had me scared for a moment there!";
-
-                    npc.gameObject.GetComponent<MouthOpenClose>().interacted = true;
-                    npc.gameObject.GetComponent<MouthOpenClose>().prompt.SetActive(false);
-                    npc.gameObject.GetComponent<MouthOpenClose>().text.SetActive(true);
-                    npc.gameObject.GetComponent<MouthOpenClose>().murmur.Play();
-                    npc.gameObject.GetComponent<MouthOpenClose>().text.GetComponent<TextMeshProUGUI>().text = npc.gameObject.GetComponent<MouthOpenClose>().whatToSay;
-                    npc.gameObject.GetComponent<MouthOpenClose>().timerDeactivate = npc.gameObject.GetComponent<MouthOpenClose>().initialTimerDeactivate;
+                    if (!ran2)
+                    {
+                        ran2 = true;
+                        npc.GetComponent<MouthOpenClose>().whatToSay = "You had me scared for a moment there!";
+                        npc.gameObject.GetComponent<MouthOpenClose>().interacted = true;
+                        npc.gameObject.GetComponent<MouthOpenClose>().prompt.SetActive(false);
+                        npc.gameObject.GetComponent<MouthOpenClose>().text.SetActive(true);
+                        PlaySFX(sfxMurmur, 100, transform, npc.gameObject.GetComponent<MouthOpenClose>().initialTimerDeactivate);
+                        npc.gameObject.GetComponent<MouthOpenClose>().text.GetComponent<TextMeshProUGUI>().text = npc.gameObject.GetComponent<MouthOpenClose>().whatToSay;
+                        npc.gameObject.GetComponent<MouthOpenClose>().timerDeactivate = npc.gameObject.GetComponent<MouthOpenClose>().initialTimerDeactivate;
+                    }
+                    
                 }
 
                 

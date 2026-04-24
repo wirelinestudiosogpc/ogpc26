@@ -46,7 +46,7 @@ public class PocketBird : MonoBehaviour
         {
             Debug.Log("Bird Hit Player");
             playerMovement.HP -= 2f;
-            PlaySFX(sfxPlayerHurt, playerMovement.gameObject.transform);
+            PlaySFX(sfxPlayerHurt, 100, playerMovement.gameObject.transform);
             GameObject.Destroy(this.gameObject);
         }
         else if (other.CompareTag("Boss")){

@@ -50,21 +50,21 @@ public class InfectedEnemy : MonoBehaviour
 
         if (agent.remainingDistance < 1.5f)
         {
-            Debug.Log("near");
+            //Debug.Log("near");
             animator.SetBool("Walk", false);
             animator.SetBool("Attack", true);
             agent.isStopped = true;
         }
         else if (agent.remainingDistance < 20)
         {
-            Debug.Log("mid");
+            //Debug.Log("mid");
             animator.SetBool("Walk", true);
             animator.SetBool("Attack", false);
             agent.isStopped = false;
         }
         else
         {
-            Debug.Log("far");
+            //Debug.Log("far");
             animator.SetBool("Walk", false);
             animator.SetBool("Attack", false);
             agent.isStopped = true;
@@ -84,7 +84,7 @@ public class InfectedEnemy : MonoBehaviour
             Destroy(hand1);
             Destroy(hand2);
             Destroy(head);
-            PlaySFX(sfxEnemyDie, transform);
+            PlaySFX(sfxEnemyDie, 100, transform);
             isDead = true;
         }
 
@@ -107,7 +107,7 @@ public class InfectedEnemy : MonoBehaviour
         {
             hp -= hurtAmount;
             MeshRenderer.material = hur;
-            PlaySFX(sfxEnemyHurt, transform);
+            PlaySFX(sfxEnemyHurt, 100, transform);
         }
     }
     public void OnTriggerStay(Collider other)

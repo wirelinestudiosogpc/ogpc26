@@ -383,7 +383,7 @@ PrefabInstance:
     - target: {fileID: 6849846833487726163, guid: 2233381aae048684e87cb4ab5e245fdc, type: 3}
       propertyPath: uiElement1
       value: 
-      objectReference: {fileID: 2187070561133003542}
+      objectReference: {fileID: 3805096564896413434}
     - target: {fileID: 6849846833487726163, guid: 2233381aae048684e87cb4ab5e245fdc, type: 3}
       propertyPath: uiElement2
       value: 
@@ -479,10 +479,6 @@ PrefabInstance:
       value: 0.627
       objectReference: {fileID: 0}
     - target: {fileID: 7210185823833823564, guid: ea14e80c059b3b54dbb84a3e8dfd3fdd, type: 3}
-      propertyPath: compass
-      value: 
-      objectReference: {fileID: 5698404262966905514}
-    - target: {fileID: 7210185823833823564, guid: ea14e80c059b3b54dbb84a3e8dfd3fdd, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 5605092478817987642}
@@ -572,11 +568,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25e400c5ddd9d8d4ab40b9c6b1d00913, type: 3}
---- !u!1 &2187070561133003542 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6943032324647584804, guid: 25e400c5ddd9d8d4ab40b9c6b1d00913, type: 3}
-  m_PrefabInstance: {fileID: 9079417426761778994}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2464733403772339753 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6644199180124504347, guid: 25e400c5ddd9d8d4ab40b9c6b1d00913, type: 3}
@@ -635,17 +626,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3499662322572225827, guid: 25e400c5ddd9d8d4ab40b9c6b1d00913, type: 3}
   m_PrefabInstance: {fileID: 9079417426761778994}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5698404262966905514 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3536555473141910936, guid: 25e400c5ddd9d8d4ab40b9c6b1d00913, type: 3}
-  m_PrefabInstance: {fileID: 9079417426761778994}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Toggle
 --- !u!1 &8227727640633332027 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 877727733306381833, guid: 25e400c5ddd9d8d4ab40b9c6b1d00913, type: 3}

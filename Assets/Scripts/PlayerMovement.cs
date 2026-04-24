@@ -99,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
         pauseAction = playerInput.actions["Pause"];
         runAction = playerInput.actions["Run"];
         lookAction = playerInput.actions["Look"];
+        PlaySFX(music[SceneManager.GetActiveScene().buildIndex], 20, transform, true);
     }
     
     public Image fadeInImg;
@@ -184,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 dashDistance = Mathf.Floor(dashDistanceTimer * 8);
                 dashDuration = 15;
-                PlaySFX(sfxDash, transform);
+                PlaySFX(sfxDash, 100, transform);
             }
             dashDistanceTimer = 0;
         }
@@ -193,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = running ? Mathf.Sqrt(runJumpHeight * -1f * gravity) : Mathf.Sqrt(jumpHeight * -1f * gravity);
             jumped = true;
-            PlaySFX(sfxJump, transform);
+            PlaySFX(sfxJump, 100, transform);
         }
         if (jumpAction.WasReleasedThisFrame() && !controller.isGrounded)
         {
@@ -207,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             StartCoroutine(FadeIn());
             HP--;
-            PlaySFX(sfxPlayerDie, transform);
+            PlaySFX(sfxPlayerDie, 100, transform);
         }
         PlayerInputs();
 
@@ -265,7 +266,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     dashDistance = Mathf.Floor(dashDistanceTimer * 8);
                     dashDuration = 15;
-                    PlaySFX(sfxDash, transform);
+                    PlaySFX(sfxDash, 100, transform);
                 }
                 dashDistanceTimer = 0;
             }
@@ -468,7 +469,7 @@ public class PlayerMovement : MonoBehaviour
             lastSwing = 3;
             timeSinceLastSwing = 0;
         }
-        PlaySFX(sfxSlash, transform);
+        PlaySFX(sfxSlash, 100, transform);
     }
 
     private void MovePlayer()
@@ -508,7 +509,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyHead"))
         {
             HP--;
-            PlaySFX(sfxPlayerHurt, transform);
+            PlaySFX(sfxPlayerHurt, 100, transform);
         }
         if (other.gameObject.CompareTag("EnemyHand"))
         {
@@ -533,7 +534,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         //StartCoroutine(LoadAsync(SceneManager.GetActiveScene().buildIndex + 1));
-        PlaySFX(sfxLevelEnd, transform);
+        PlaySFX(sfxLevelEnd, 100, transform);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     IEnumerator LoadAsync(int sceneInt)

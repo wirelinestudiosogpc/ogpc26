@@ -6,6 +6,15 @@ public static class AudioStuff
     //main
     public static AudioClip sfxLevelEnd = Resources.Load<AudioClip>("sfx/levelEnd");
 
+
+    //music
+    public static AudioClip musicVillage = Resources.Load<AudioClip>("sfx/music/village");
+    public static AudioClip musicForrest = Resources.Load<AudioClip>("sfx/music/village");
+    public static AudioClip musicCave = Resources.Load<AudioClip>("sfx/music/cave");
+    public static AudioClip musicBoss = Resources.Load<AudioClip>("sfx/music/boss");
+    public static AudioClip[] music = new[] {musicVillage, musicForrest, musicCave, musicBoss};
+
+
     //player
     public static AudioClip sfxJump = Resources.Load<AudioClip>("sfx/player/jump");
     public static AudioClip sfxSlash = Resources.Load<AudioClip>("sfx/player/slash");
@@ -14,9 +23,14 @@ public static class AudioStuff
     public static AudioClip sfxPlayerHurt = Resources.Load<AudioClip>("sfx/player/hurt");
 
 
+    //npc
+    public static AudioClip sfxMurmur = Resources.Load<AudioClip>("sfx/npc/murmur");
+
+
     //enemy
     public static AudioClip sfxEnemyDie = Resources.Load<AudioClip>("sfx/enemy/die");
     public static AudioClip sfxEnemyHurt = Resources.Load<AudioClip>("sfx/enemy/hurt");
+
 
     //boss
     public static AudioClip sfxBirdSplit = Resources.Load<AudioClip>("sfx/boss/birdSplit");
@@ -29,39 +43,60 @@ public static class AudioStuff
     public static AudioClip sfxBossParry = Resources.Load<AudioClip>("sfx/boss/parry");
     public static AudioClip sfxBossSlash = Resources.Load<AudioClip>("sfx/boss/slash");
 
-    public static void PlaySFX(AudioClip clip, Transform parent)
+    public static void PlaySFX(AudioClip clip, float volume, Transform parent)
     {
         GameObject obj = new();
         obj.transform.position = parent.position;
         obj.transform.SetParent(parent);
-        obj.name = $"SFX_{clip.name}";
+        obj.name = $"audio_{clip.name}";
         AudioSource source = obj.AddComponent<AudioSource>();
         source.clip = clip;
+        source.volume = volume/100;
         source.Play();
         Object.Destroy(obj, clip.length);
     }
-    public static void PlaySFX(AudioClip clip, Transform parent, bool loop)
+    public static void PlaySFX(AudioClip clip, float volume, Transform parent, bool loop)
     {
         GameObject obj = new();
         obj.transform.position = parent.position;
         obj.transform.SetParent(parent);
-        obj.name = $"SFX_{clip.name}";
         AudioSource source = obj.AddComponent<AudioSource>();
         source.clip = clip;
+        source.volume = volume/100;
         source.Play();
         if (loop)
+        {
+            obj.name = $"audio_{clip.name}_loop";
             source.loop = true;
+        }
         else
+        {
+            obj.name = $"audio_{clip.name}";
             Object.Destroy(obj, clip.length);
+        }
     }
-    public static IEnumerator LoopSFX(AudioClip clip, Transform parent, int loopCount)
+    public static void PlaySFX(AudioClip clip, float volume, Transform parent, float loopTime)
     {
         GameObject obj = new();
         obj.transform.position = parent.position;
         obj.transform.SetParent(parent);
-        obj.name = $"SFX_{clip.name}";
+        obj.name = $"audio_{clip.name}_loop_{loopTime}_seconds";
         AudioSource source = obj.AddComponent<AudioSource>();
         source.clip = clip;
+        source.volume = volume/100;
+        source.loop = true;
+        source.Play();
+        Object.Destroy(obj, loopTime);
+    }
+    public static IEnumerator LoopSFX(AudioClip clip, float volume, Transform parent, int loopCount)
+    {
+        GameObject obj = new();
+        obj.transform.position = parent.position;
+        obj.transform.SetParent(parent);
+        obj.name = $"audio_{clip.name}_loop_{loopCount}_times";
+        AudioSource source = obj.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.volume = volume/100;
         for (int i = 0; i < loopCount; i++)
         {
             source.Play();
