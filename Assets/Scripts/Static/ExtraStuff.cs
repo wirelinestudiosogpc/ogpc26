@@ -42,6 +42,8 @@ public static class AudioStuff
     public static AudioClip sfxBossKilled = Resources.Load<AudioClip>("sfx/boss/killed");
     public static AudioClip sfxBossParry = Resources.Load<AudioClip>("sfx/boss/parry");
     public static AudioClip sfxBossSlash = Resources.Load<AudioClip>("sfx/boss/slash");
+    public static AudioClip sfxBossWoosh = Resources.Load<AudioClip>("sfx/boss/woosh");
+    public static AudioClip sfxBossGotcha = Resources.Load<AudioClip>("sfx/boss/gotcha");
 
     public static void PlaySFX(AudioClip clip, float volume, Transform parent)
     {
