@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
-using UnityEngine.SceneManagement;
 using static AudioStuff;
 
 public class LevelEndNPC : MonoBehaviour

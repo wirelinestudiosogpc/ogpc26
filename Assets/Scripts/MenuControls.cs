@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 using System.Collections;
 
 public class MenuControls : MonoBehaviour
