@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static AudioStuff;
 
 public class SteampunkBoss : MonoBehaviour
@@ -14,6 +15,8 @@ public class SteampunkBoss : MonoBehaviour
     public bool setTimer = false;
     public Vector3 TargetPosition;
     public bool setposition = false;
+    public float tpTimer = 1;
+    public ParticleSystem deathParticles;
 
     public GameObject JumpHitbox;
 
@@ -88,6 +91,10 @@ public class SteampunkBoss : MonoBehaviour
         {
             SlashParry();
         }
+        else if (randomNumber == 0)
+        {
+            stallTimer -= Time.deltaTime;
+        }
 
         HPBar.sizeDelta = new Vector2(HP*7.8f, HPBar.sizeDelta.y);
 
@@ -95,6 +102,7 @@ public class SteampunkBoss : MonoBehaviour
         {
             if (randomNumber > 0)
             {
+                deathParticles.Play();
                 PlaySFX(sfxBossKilled, 100, transform);
                 randomNumber = 0;
             }
@@ -103,8 +111,16 @@ public class SteampunkBoss : MonoBehaviour
 
             if (deathTimer <= 0)
             {
-                
-                Destroy(this.gameObject);
+                transform.position = new Vector3(10000, -50, 10000);
+
+                StartCoroutine(playerMovement.FadeIn());
+
+                tpTimer -= Time.deltaTime;
+
+                if (tpTimer <= 0)
+                {
+                    SceneManager.LoadScene(0);
+                }
             }
         }
     }
@@ -245,6 +261,7 @@ public class SteampunkBoss : MonoBehaviour
 
         if (parry && stallTimer > 0.25f)
         {   
+            Destroy(GameObject.Find("Parry Star(Clone)"));
             stallTimer = 0.25f;
             CounterAttack.SetActive(true);
         }
@@ -355,9 +372,14 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
+            Instantiate(ParryStar, new Vector3(transform.position.x + 0.3f, transform.position.y + 1.5f, transform.position.z + 0.75f), transform.rotation);
             PlaySFX(sfxBossParry, 100, transform);
             stallTimer = 1.3f;
             setTimer = true;
+        }
+        if (stallTimer < 1.3 && stallTimer > 1.2)
+        {
+            Destroy(GameObject.Find("Parry Star(Clone)"));
         }
        if (parry && stallTimer > 0.25f)
         {   

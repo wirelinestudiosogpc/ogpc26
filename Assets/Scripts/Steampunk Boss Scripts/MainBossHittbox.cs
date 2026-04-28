@@ -26,7 +26,7 @@ public class MainBossHittbox : MonoBehaviour
             playerMovement.HP -= 1;
             PlaySFX(sfxPlayerHurt, 100, playerMovement.gameObject.transform);
         }
-        if (other.CompareTag("Sword") && (steampunkBoss.randomNumber == 5 || steampunkBoss.randomNumber == 8) && !steampunkBoss.parry)
+        if (other.CompareTag("Sword") && (steampunkBoss.randomNumber == 5 || steampunkBoss.randomNumber == 8) && !steampunkBoss.parry && steampunkBoss.stallTimer <= 0.8)
         {
             PlaySFX(sfxBossGotcha, 100, transform);
             Debug.Log("Parried");
