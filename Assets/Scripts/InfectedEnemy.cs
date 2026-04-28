@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.XR;
 using static AudioStuff;
 
 public class InfectedEnemy : MonoBehaviour
