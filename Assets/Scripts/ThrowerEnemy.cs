@@ -41,6 +41,8 @@ public class ThrowerEnemy : MonoBehaviour
             deadTimer += Time.deltaTime;
             if (deadTimer >= deadTimerMax)
                 Destroy(gameObject);
+            if (!isInside && hp != 0)
+                MeshRenderer.material = def;
             return;
         }
 
