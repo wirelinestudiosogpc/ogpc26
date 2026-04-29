@@ -250,7 +250,7 @@ public class SteampunkBoss : MonoBehaviour
         if (!setTimer)
         {
             PlaySFX(sfxBossParry, 100, transform);
-            Instantiate(ParryStar, new Vector3(transform.position.x + 0.3f, transform.position.y + 1.5f, transform.position.z + 0.75f), transform.rotation);
+            Instantiate(ParryStar, new Vector3(transform.position.x + -0.4f, transform.position.y + 1.6f, transform.position.z + 0.6f), transform.rotation, transform);
             stallTimer = 1.5f;
             setTimer = true;
         }

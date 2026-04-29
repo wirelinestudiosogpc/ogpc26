@@ -13,8 +13,6 @@ public class InfectedEnemy : MonoBehaviour
 
     private NavMeshAgent agent;
     public Transform target;
-    public Transform trueTarget;
-
     public Animator animator;
 
 
@@ -31,7 +29,6 @@ public class InfectedEnemy : MonoBehaviour
         //MeshRenderer = GetComponent<MeshRenderer>();
         agent = GetComponent<NavMeshAgent>();
         MeshRenderer.material = def;
-        trueTarget = target;
         target = GameObject.Find("Player").transform;
     }
 
@@ -87,8 +84,8 @@ public class InfectedEnemy : MonoBehaviour
             isDead = true;
         }
 
-        if (!isInside && hp != 0)
-            MeshRenderer.material = def;
+        //if (!isInside && hp != 0)
+        //    MeshRenderer.material = def;
 
         
         

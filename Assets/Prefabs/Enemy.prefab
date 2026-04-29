@@ -92,6 +92,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!136 &8235422773673007900
 CapsuleCollider:
@@ -131,7 +132,7 @@ MonoBehaviour:
   hp: 2
   hurtAmount: 1
   MeshRenderer: {fileID: 7703957329262032464}
-  def: {fileID: 2100000, guid: 9cfdb5d994abe04408eb98a370f3a821, type: 2}
+  def: {fileID: 2100000, guid: 2eda7f3d603f08c4ab4fd460b3958d30, type: 2}
   hur: {fileID: 2100000, guid: 6bfeb21d3d239634081601c20ff3133e, type: 2}
   isInside: 0
   target: {fileID: 0}
