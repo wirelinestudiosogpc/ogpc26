@@ -162,11 +162,26 @@ public class MenuControls : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-        StartCoroutine(LoadAsync());
+        StartCoroutine(LoadAsync(1));
     }
-    IEnumerator LoadAsync()
+    public void PlayGame2()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        StartCoroutine(LoadAsync(2));
+    }
+    public void PlayGame3()
+    {
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        StartCoroutine(LoadAsync(3));
+    }
+    public void PlayGame4()
+    {
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        StartCoroutine(LoadAsync(4));
+    }
+    IEnumerator LoadAsync(int scene)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
 
         while (!operation.isDone)
         {
@@ -175,7 +190,9 @@ public class MenuControls : MonoBehaviour
     }
     public void QuitGame()
     {
+        #if !UNITY_WEBGL
         Application.Quit();
+        #endif
     }
 
     public void OpenSettings()

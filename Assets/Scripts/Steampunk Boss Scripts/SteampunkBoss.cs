@@ -224,7 +224,7 @@ public class SteampunkBoss : MonoBehaviour
     {
         if (!setTimer)
         {
-            PlaySFX(sfxMurmur, 100, transform, 1.5f);
+            PlaySFX(sfxMurmur, 100, transform, 0.15f);
             stallTimer = 1.5f;
             setTimer = true;
         }
