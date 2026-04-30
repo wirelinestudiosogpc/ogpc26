@@ -144,6 +144,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
         moveInput = walkAction.ReadValue<Vector2>();
+        if ((moveInput.x != 0 || moveInput.y != 0) && running)
+        {
+            energy -= 15 * Time.deltaTime;
+            //energySlider.value = energy;
+            //Debug.Log("Happening");
+        }
+        if (energy <= 0.1f)
+        {
+            running = false;
+        }
 
         if (runAction.WasPressedThisFrame() && !running)
         {
@@ -185,10 +195,11 @@ public class PlayerMovement : MonoBehaviour
             dashDistanceTimer = 0;
         }
 
-        if (jumpAction.WasPressedThisFrame() && controller.isGrounded)
+        if (jumpAction.WasPressedThisFrame() && controller.isGrounded && energy >= 8)
         {
             velocity.y = running ? Mathf.Sqrt(runJumpHeight * -1f * gravity) : Mathf.Sqrt(jumpHeight * -1f * gravity);
             jumped = true;
+            energy -= 8;
             PlaySFX(sfxJump, 100, transform);
         }
         if (jumpAction.WasReleasedThisFrame() && !controller.isGrounded)
@@ -231,7 +242,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (swungTimer > 1f)
             swung = false;
-        if (!swung)
+        if (!swung && !running)
         {
             swungTimer = 0;
             energy += 70 * Time.deltaTime;
