@@ -199,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = running ? Mathf.Sqrt(runJumpHeight * -1f * gravity) : Mathf.Sqrt(jumpHeight * -1f * gravity);
             jumped = true;
-            energy -= 8;
+            energy -= 12;
             PlaySFX(sfxJump, 100, transform);
         }
         if (jumpAction.WasReleasedThisFrame() && !controller.isGrounded)
@@ -242,7 +242,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (swungTimer > 1f)
             swung = false;
-        if (!swung && !running)
+        if (!swung && (!running || (moveInput.x == 0 && moveInput.y == 0)))
         {
             swungTimer = 0;
             energy += 70 * Time.deltaTime;

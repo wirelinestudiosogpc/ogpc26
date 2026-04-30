@@ -74,7 +74,7 @@ public class IntroWagon : MonoBehaviour
                 npc.gameObject.GetComponent<MouthOpenClose>().interacted = true;
                 npc.gameObject.GetComponent<MouthOpenClose>().prompt.SetActive(false);
                 npc.gameObject.GetComponent<MouthOpenClose>().text.SetActive(true);
-                PlaySFX(sfxMurmur, 100, transform);
+                PlaySFX(sfxMurmur, 60, transform);
                 npc.gameObject.GetComponent<MouthOpenClose>().text.GetComponent<TextMeshProUGUI>().text = npc.gameObject.GetComponent<MouthOpenClose>().whatToSay;
                 npc.gameObject.GetComponent<MouthOpenClose>().timerDeactivate = npc.gameObject.GetComponent<MouthOpenClose>().initialTimerDeactivate;
             }
@@ -137,7 +137,7 @@ public class IntroWagon : MonoBehaviour
                         npc.gameObject.GetComponent<MouthOpenClose>().interacted = true;
                         npc.gameObject.GetComponent<MouthOpenClose>().prompt.SetActive(false);
                         npc.gameObject.GetComponent<MouthOpenClose>().text.SetActive(true);
-                        PlaySFX(sfxMurmur, 100, transform);
+                        PlaySFX(sfxMurmur, 60, transform);
                         npc.gameObject.GetComponent<MouthOpenClose>().text.GetComponent<TextMeshProUGUI>().text = npc.gameObject.GetComponent<MouthOpenClose>().whatToSay;
                         npc.gameObject.GetComponent<MouthOpenClose>().timerDeactivate = npc.gameObject.GetComponent<MouthOpenClose>().initialTimerDeactivate;
                     }

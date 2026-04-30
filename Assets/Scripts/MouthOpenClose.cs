@@ -138,7 +138,7 @@ public class MouthOpenClose : MonoBehaviour
             interacted = true;
             prompt.SetActive(false);
             text.SetActive(true);
-            PlaySFX(sfxMurmur, 100, audioParent);
+            PlaySFX(sfxMurmur, 60, audioParent);
             text.GetComponent<TextMeshProUGUI>().text = whatToSay;
             timerDeactivate = initialTimerDeactivate;
         }

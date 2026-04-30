@@ -142,12 +142,12 @@ public class LevelEndNPC : MonoBehaviour
             if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
             {
                 text.GetComponent<TextMeshProUGUI>().text = whatToSay;
-                PlaySFX(sfxMurmur, 100, audioParent, initialTimerDeactivate);
+                PlaySFX(sfxMurmur, 60, audioParent, initialTimerDeactivate);
             }
             else
             {
                 text.GetComponent<TextMeshProUGUI>().text = whatToSay2;
-                PlaySFX(sfxMurmur, 100, audioParent, initialTimerDeactivate);
+                PlaySFX(sfxMurmur, 60, audioParent, initialTimerDeactivate);
                 Invoke(nameof(nextLevelGo), 3f);
             }
             timerDeactivate = initialTimerDeactivate;
